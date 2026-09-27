@@ -1,0 +1,471 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: #ffffff;
+}
+
+
+/* NAVBAR */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(8, 8, 8, 0.92);
+    border-bottom: 1px solid #222;
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.85;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.brand strong {
+    color: #ff6a00;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.nav-links a:hover {
+    color: #ff6a00;
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    padding: 160px 10% 100px;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.tag {
+    color: #ff6a00;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(70px, 12vw, 150px);
+    line-height: 0.8;
+    letter-spacing: -5px;
+}
+
+.hero h1 span {
+    color: #ff6a00;
+}
+
+.description {
+    margin-top: 35px;
+    color: #aaa;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.buttons {
+    margin-top: 40px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 16px 28px;
+
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    transition: 0.2s;
+}
+
+.primary {
+    background: #ff6a00;
+    color: #fff;
+}
+
+.primary:hover {
+    background: #fff;
+    color: #000;
+}
+
+.secondary {
+    border: 1px solid #555;
+    color: #fff;
+}
+
+.secondary:hover {
+    border-color: #ff6a00;
+    color: #ff6a00;
+}
+
+
+/* DECORAÇÃO */
+
+.hero-decoration {
+    position: absolute;
+    right: -150px;
+    top: 15%;
+}
+
+.circle {
+    width: 600px;
+    height: 600px;
+    border: 100px solid #111;
+    border-radius: 50%;
+}
+
+.orange-line {
+    position: absolute;
+    width: 500px;
+    height: 15px;
+
+    background: #ff6a00;
+
+    transform: rotate(-35deg);
+    top: 300px;
+    left: -50px;
+}
+
+
+/* SECTIONS */
+
+section {
+    padding: 100px 8%;
+}
+
+.section-title {
+    margin-bottom: 45px;
+}
+
+.section-title p {
+    color: #ff6a00;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.section-title h2 {
+    font-size: 48px;
+    margin-top: 8px;
+}
+
+
+/* MATCH */
+
+.match-section {
+    background: #0d0d0d;
+}
+
+.match-card {
+    max-width: 1000px;
+    margin: auto;
+
+    padding: 45px;
+
+    background: #151515;
+    border: 1px solid #252525;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.team-logo {
+    width: 80px;
+    height: 80px;
+
+    margin: auto auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #222;
+    border: 2px solid #ff6a00;
+
+    font-weight: bold;
+}
+
+.team h3 {
+    line-height: 1.2;
+}
+
+.match-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.match-info span {
+    color: #aaa;
+}
+
+.match-info strong {
+    font-size: 45px;
+    color: #ff6a00;
+}
+
+.match-info small {
+    color: #666;
+}
+
+
+/* STATS */
+
+.stats-section {
+    text-align: center;
+}
+
+.stats {
+    max-width: 1000px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    border-top: 1px solid #292929;
+    border-bottom: 1px solid #292929;
+}
+
+.stat {
+    padding: 40px 20px;
+    border-right: 1px solid #292929;
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat strong {
+    display: block;
+    font-size: 55px;
+    color: #ff6a00;
+}
+
+.stat span {
+    color: #888;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+
+/* PLANTEL */
+
+.team-section {
+    background: #0d0d0d;
+}
+
+.players {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.player {
+    min-height: 220px;
+    padding: 25px;
+
+    background: #151515;
+    border: 1px solid #292929;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    transition: 0.2s;
+}
+
+.player:hover {
+    transform: translateY(-5px);
+    border-color: #ff6a00;
+}
+
+.player > span {
+    color: #ff6a00;
+    font-size: 14px;
+    margin-bottom: auto;
+}
+
+.player h3 {
+    font-size: 20px;
+}
+
+.player p {
+    color: #777;
+    margin-top: 5px;
+}
+
+
+/* RECRUITMENT */
+
+.recruitment {
+    text-align: center;
+    background: #ff6a00;
+}
+
+.recruitment p {
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.recruitment h2 {
+    font-size: clamp(60px, 10vw, 130px);
+    line-height: 0.85;
+    margin: 25px 0 40px;
+}
+
+.recruitment h2 span {
+    color: #000;
+}
+
+.recruitment .primary {
+    background: #000;
+}
+
+.recruitment .primary:hover {
+    background: #fff;
+    color: #000;
+}
+
+
+/* FOOTER */
+
+footer {
+    padding: 40px 8%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #050505;
+}
+
+footer p {
+    color: #555;
+    font-size: 12px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        padding: 18px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 140px 25px 80px;
+    }
+
+    .hero h1 {
+        font-size: 70px;
+    }
+
+    .hero-decoration {
+        opacity: 0.4;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        text-align: center;
+    }
+
+    section {
+        padding: 70px 25px;
+    }
+
+    .match-card {
+        padding: 25px 10px;
+        gap: 10px;
+    }
+
+    .team-logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .match-info strong {
+        font-size: 30px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat:nth-child(2) {
+        border-right: none;
+    }
+
+    .stat {
+        border-bottom: 1px solid #292929;
+    }
+
+    .players {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
