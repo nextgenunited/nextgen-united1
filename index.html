@@ -4186,5 +4186,116 @@ service cloud.firestore {
 })();
 </script>
 
+
+<button id="saveAttendanceBtn" type="button" onclick="saveAttendanceData()">💾 GUARDAR PRESENÇAS</button>
+<div id="attendanceSavedMsg">✓ Presenças guardadas</div>
+<style id="attendance-save-styles">
+#saveAttendanceBtn {
+  position: fixed; right: 18px; bottom: 72px; z-index: 9998;
+  display: none; border: 0; border-radius: 999px; padding: 11px 16px;
+  background: #2563eb; color: white; font-weight: 700; cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,.18);
+}
+#attendanceSavedMsg {
+  position: fixed; right: 18px; bottom: 124px; z-index: 9999;
+  display: none; padding: 9px 13px; border-radius: 10px;
+  background: #166534; color: white; font-weight: 700;
+}
+body.admin-locked #saveAttendanceBtn { display: none !important; }
+body:not(.admin-locked) #saveAttendanceBtn { display: block; }
+</style>
+
+
+<script id="attendance-persistence-script">
+(function () {
+  const SNAPSHOT_KEY = "__attendance_site_snapshot_v1";
+
+  function isAttendanceKey(key) {
+    if (!key) return false;
+    const k = String(key).toLowerCase();
+    return k.includes("attendance") ||
+           k.includes("presenc") ||
+           k.includes("presença") ||
+           k.includes("treino") ||
+           k.includes("training") ||
+           k.includes("presence");
+  }
+
+  function saveAttendanceData(showMessage) {
+    const snapshot = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (isAttendanceKey(key)) snapshot[key] = localStorage.getItem(key);
+    }
+
+    // Also preserve the current week/date selection if the site stores it.
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const k = String(key || "").toLowerCase();
+      if (k.includes("week") || k.includes("semana") || k.includes("date") || k.includes("data")) {
+        snapshot[key] = localStorage.getItem(key);
+      }
+    }
+
+    localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(snapshot));
+
+    // Force a save of any current DOM-backed attendance data if the existing
+    // site exposes a common save function.
+    const candidates = [
+      window.saveAttendance,
+      window.savePresences,
+      window.savePresence,
+      window.persistAttendance
+    ];
+    for (const fn of candidates) {
+      if (typeof fn === "function") {
+        try { fn(); } catch (_) {}
+      }
+    }
+
+    if (showMessage) {
+      const msg = document.getElementById("attendanceSavedMsg");
+      if (msg) {
+        msg.style.display = "block";
+        clearTimeout(window.__attendanceSaveTimer);
+        window.__attendanceSaveTimer = setTimeout(() => msg.style.display = "none", 1800);
+      }
+    }
+  }
+
+  function restoreAttendanceData() {
+    try {
+      const raw = localStorage.getItem(SNAPSHOT_KEY);
+      if (!raw) return;
+      const snapshot = JSON.parse(raw);
+      if (!snapshot || typeof snapshot !== "object") return;
+
+      for (const [key, value] of Object.entries(snapshot)) {
+        // Do not overwrite an already-existing newer value with an empty one.
+        if (value !== null && value !== undefined) localStorage.setItem(key, value);
+      }
+    } catch (_) {}
+  }
+
+  window.saveAttendanceData = function () {
+    saveAttendanceData(true);
+  };
+
+  // Restore before the page's own DOM initialization when possible.
+  restoreAttendanceData();
+
+  // Some existing scripts write the attendance state after DOMContentLoaded.
+  // Save a snapshot shortly after startup as well.
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => saveAttendanceData(false), 250);
+  });
+
+  // Keep the explicit Save button authoritative.
+  window.addEventListener("beforeunload", function () {
+    saveAttendanceData(false);
+  });
+})();
+</script>
+
 </body>
 </html>
