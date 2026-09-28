@@ -129,6 +129,127 @@
 
 
         /* =========================
+           REDES SOCIAIS
+        ========================= */
+
+        .social-menu {
+            position: relative;
+        }
+
+        .social-menu-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .social-menu-button span {
+            color: #ff6a00;
+            font-size: 9px;
+            transition: 0.2s ease;
+        }
+
+        .social-menu.open .social-menu-button {
+            color: #ff6a00;
+        }
+
+        .social-menu.open .social-menu-button span {
+            transform: rotate(180deg);
+        }
+
+        .social-dropdown {
+            position: absolute;
+            top: calc(100% + 20px);
+            right: 0;
+
+            min-width: 165px;
+
+            background: #0b0b0b;
+            border: 1px solid #292929;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.65);
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+
+            transition: 0.2s ease;
+
+            z-index: 2000;
+        }
+
+        .social-dropdown::before {
+            content: "";
+
+            position: absolute;
+
+            top: -6px;
+            right: 20px;
+
+            width: 10px;
+            height: 10px;
+
+            background: #0b0b0b;
+
+            border-left: 1px solid #292929;
+            border-top: 1px solid #292929;
+
+            transform: rotate(45deg);
+        }
+
+        .social-menu:hover .social-dropdown,
+        .social-menu.open .social-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .social-dropdown a {
+            position: relative;
+
+            display: block;
+
+            padding: 15px 18px;
+
+            color: #777;
+
+            text-decoration: none;
+
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 1.7px;
+
+            border-bottom: 1px solid #191919;
+
+            transition: 0.2s ease;
+        }
+
+        .social-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .social-dropdown a::before {
+            content: "→";
+
+            color: #ff6a00;
+
+            margin-right: 9px;
+
+            transition: 0.2s ease;
+        }
+
+        .social-dropdown a:hover {
+            color: #fff;
+            background: #151515;
+            padding-left: 22px;
+        }
+
+        .social-dropdown a:hover::before {
+            margin-right: 12px;
+        }
+
+
+        /* =========================
            PAGES
         ========================= */
 
@@ -974,9 +1095,6 @@
                 0 20px 60px rgba(0,0,0,0.35);
         }
 
-
-        /* HEADER DA TABELA */
-
         .stats-header {
             display: grid;
 
@@ -1004,9 +1122,6 @@
             font-weight: 900;
             letter-spacing: 1.6px;
         }
-
-
-        /* BOTÕES CLICÁVEIS */
 
         .stats-sort {
             width: 100%;
@@ -1048,9 +1163,6 @@
 
             font-size: 8px;
         }
-
-
-        /* LINHAS */
 
         .stats-row {
             display: grid;
@@ -1106,13 +1218,6 @@
             font-weight: 700;
         }
 
-
-        /* =========================
-           CORES DA TABELA
-        ========================= */
-
-        /* GR */
-
         .goalkeeper-row {
             border-left: 4px solid #8b5cf6;
         }
@@ -1124,9 +1229,6 @@
         .goalkeeper-row span:nth-child(2) {
             color: #8b5cf6;
         }
-
-
-        /* DEFESAS */
 
         .defender-row {
             border-left: 4px solid #ff6a00;
@@ -1140,9 +1242,6 @@
             color: #ff6a00;
         }
 
-
-        /* MÉDIOS */
-
         .midfielder-row {
             border-left: 4px solid #1683ff;
         }
@@ -1155,12 +1254,8 @@
             color: #1683ff;
         }
 
-
-        /* MARTINS */
-
         .martins-row {
             background: #020202;
-
             border-left: 4px solid #333;
         }
 
@@ -1172,12 +1267,8 @@
             color: #777;
         }
 
-
-        /* TEDDY */
-
         .teddy-row {
             background: #151208;
-
             border-left: 4px solid #d6a928;
         }
 
@@ -1188,9 +1279,6 @@
         .teddy-row span:nth-child(2) {
             color: #d6a928;
         }
-
-
-        /* VALORES */
 
         .goals-value {
             color: #ff6a00 !important;
@@ -1442,6 +1530,24 @@
                 display: none;
             }
 
+            .social-dropdown {
+                right: 50%;
+                transform: translate(50%, -8px);
+            }
+
+            .social-menu:hover .social-dropdown {
+                transform: translate(50%, 0);
+            }
+
+            .social-menu.open .social-dropdown {
+                transform: translate(50%, 0);
+            }
+
+            .social-dropdown::before {
+                right: 50%;
+                transform: translateX(50%) rotate(45deg);
+            }
+
 
             .home-hero {
                 min-height: 80vh;
@@ -1674,6 +1780,51 @@
         >
             JOGOS
         </button>
+
+
+        <!-- REDES SOCIAIS -->
+
+        <div class="social-menu" id="socialMenu">
+
+            <button
+                type="button"
+                class="social-menu-button"
+                onclick="toggleSocialMenu(event)"
+            >
+                REDES SOCIAIS
+                <span>▾</span>
+            </button>
+
+
+            <div class="social-dropdown">
+
+                <a
+                    href="https://www.youtube.com/@NextGenUnited10"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    YOUTUBE
+                </a>
+
+                <a
+                    href="https://www.tiktok.com/@nextgenunited1?_r=1&_t=ZG-9A6kmCZLicr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    TIKTOK
+                </a>
+
+                <a
+                    href="https://www.instagram.com/_nextgenunited_?stkn=aW8xNWp3YXN1aDA3"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    INSTAGRAM
+                </a>
+
+            </div>
+
+        </div>
 
     </nav>
 
@@ -2354,8 +2505,6 @@
 
         <div class="stats-table">
 
-            <!-- CABEÇALHO -->
-
             <div class="stats-header">
 
                 <span>JOGADOR</span>
@@ -2401,8 +2550,6 @@
             </div>
 
 
-            <!-- GUARDA-REDES -->
-
             <div class="stats-row goalkeeper-row">
                 <strong>NIGHTFACE</strong>
                 <span>GR</span>
@@ -2430,8 +2577,6 @@
                 <span class="yellow-value">0</span>
             </div>
 
-
-            <!-- DEFESAS -->
 
             <div class="stats-row defender-row">
                 <strong>BANJAQUI</strong>
@@ -2487,8 +2632,6 @@
                 <span class="yellow-value">0</span>
             </div>
 
-
-            <!-- MÉDIOS -->
 
             <div class="stats-row midfielder-row">
                 <strong>DUDA</strong>
@@ -2554,8 +2697,6 @@
             </div>
 
 
-            <!-- MARTINS -->
-
             <div class="stats-row martins-row">
                 <strong>MARTINS</strong>
                 <span>PL</span>
@@ -2566,8 +2707,6 @@
             </div>
 
 
-            <!-- TEDDY -->
-
             <div class="stats-row teddy-row">
                 <strong>TEDDY</strong>
                 <span>PL</span>
@@ -2577,8 +2716,6 @@
                 <span class="yellow-value">2</span>
             </div>
 
-
-            <!-- CV -->
 
             <div class="stats-row">
                 <strong>CV</strong>
@@ -2889,9 +3026,7 @@
             document.querySelectorAll(".page");
 
         pages.forEach(function(page) {
-
             page.classList.remove("active");
-
         });
 
 
@@ -2899,19 +3034,17 @@
             document.getElementById(pageName);
 
         if (selectedPage) {
-
             selectedPage.classList.add("active");
-
         }
 
 
         const buttons =
-            document.querySelectorAll("nav button");
+            document.querySelectorAll(
+                "nav > button"
+            );
 
         buttons.forEach(function(button) {
-
             button.classList.remove("active");
-
         });
 
 
@@ -2921,9 +3054,7 @@
             );
 
         if (selectedButton) {
-
             selectedButton.classList.add("active");
-
         }
 
 
@@ -2933,6 +3064,44 @@
         });
 
     }
+
+
+    /* =========================
+       REDES SOCIAIS
+    ========================= */
+
+    function toggleSocialMenu(event) {
+
+        event.stopPropagation();
+
+        const menu =
+            document.getElementById(
+                "socialMenu"
+            );
+
+        menu.classList.toggle("open");
+
+    }
+
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            const menu =
+                document.getElementById(
+                    "socialMenu"
+                );
+
+            if (
+                menu &&
+                !menu.contains(event.target)
+            ) {
+                menu.classList.remove("open");
+            }
+
+        }
+    );
 
 
     /* =========================
@@ -3191,8 +3360,6 @@
         ).textContent = player.yellow;
 
 
-        /* CARGO */
-
         const role =
             document.getElementById(
                 "modalPlayerRole"
@@ -3231,8 +3398,6 @@
 
         }
 
-
-        /* FOTO */
 
         if (player.photo) {
 
@@ -3353,14 +3518,6 @@
                     );
 
 
-                /*
-                 * Primeiro clique:
-                 * maior -> menor
-                 *
-                 * Segundo clique:
-                 * menor -> maior
-                 */
-
                 if (
                     currentSortColumn ===
                     column
@@ -3379,8 +3536,6 @@
 
                 }
 
-
-                /* RESET DOS BOTÕES */
 
                 sortButtons.forEach(
                     function(otherButton) {
@@ -3403,8 +3558,6 @@
                 );
 
 
-                /* BOTÃO ATIVO */
-
                 button.classList.add(
                     "active"
                 );
@@ -3426,8 +3579,6 @@
                 }
 
 
-                /* TODAS AS LINHAS */
-
                 const rows =
                     Array.from(
                         statsTable.querySelectorAll(
@@ -3435,12 +3586,6 @@
                         )
                     );
 
-
-                /*
-                 * Guardamos a posição original
-                 * para manter uma ordem estável
-                 * quando os valores são iguais.
-                 */
 
                 rows.forEach(
                     function(row, index) {
@@ -3451,8 +3596,6 @@
                     }
                 );
 
-
-                /* ORDENAR */
 
                 rows.sort(
                     function(a, b) {
@@ -3511,8 +3654,6 @@
                     }
                 );
 
-
-                /* RECOLOCAR LINHAS */
 
                 rows.forEach(
                     function(row) {
