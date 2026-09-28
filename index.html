@@ -4061,36 +4061,62 @@ const ADMIN_EMAILS = {
   }
   async function googleLogin(){if(!cloudReady){alert('O login ainda não está configurado. É preciso ligar este site ao projeto Firebase.');return;}try{const provider=new firebase.auth.GoogleAuthProvider();await firebase.auth().signInWithPopup(provider);}catch(e){alert('Não foi possível entrar com Google: '+e.message);}}
   async function googleLogout(){if(window.firebase)await firebase.auth().signOut();}
-  async function loadWeekFromCloud(){if(!cloudReady){try{attendanceData=JSON.parse(localStorage.getItem('trainingAttendanceData')||'{}')||{};}catch(e){attendanceData={};}renderAttendance();return;}try{const start=dateKey(attendanceWeekStart);const snap=await firebase.firestore().collection('trainingAttendance').doc(start).get();attendanceData=snap.exists?(snap.data().days||{}):{};renderAttendance();}catch(e){console.error(e);alert('Erro ao carregar as presenças.');}}
+  const LOCAL_ATTENDANCE_KEY='trainingAttendanceData_TEDDY_V2';
+
+  async function loadWeekFromCloud(){
+    try{
+      const raw=localStorage.getItem(LOCAL_ATTENDANCE_KEY);
+      attendanceData=raw?JSON.parse(raw)||{}:{};
+    }catch(e){
+      attendanceData={};
+      console.error('Erro a carregar presenças:',e);
+    }
+    renderAttendance();
+  }
+
   async function saveWeekToCloud(){
     if(!canEdit)return;
-    if(!cloudReady){localStorage.setItem('trainingAttendanceData',JSON.stringify(attendanceData));return;}
-    const start=dateKey(attendanceWeekStart);
-    await firebase.firestore().collection('trainingAttendance').doc(start).set({days:attendanceData,updatedAt:firebase.firestore.FieldValue.serverTimestamp(),updatedBy:(currentUser&&currentUser.email)||'miguelrrangelo12@gmail.com'},{merge:true});
+    try{
+      localStorage.setItem(LOCAL_ATTENDANCE_KEY,JSON.stringify(attendanceData));
+      localStorage.setItem('trainingAttendanceData',JSON.stringify(attendanceData));
+    }catch(e){
+      console.error('Erro a guardar presenças:',e);
+      throw e;
+    }
   }
+
   window.saveAttendanceData=async function(){
-    if(!canEdit){alert('Entra primeiro no MODO ADMIN para guardar as presenças.');return;}
+    if(!canEdit){
+      alert('Entra primeiro no MODO ADMIN para guardar as presenças.');
+      return;
+    }
     try{
-      await saveWeekToCloud();
+      localStorage.setItem(LOCAL_ATTENDANCE_KEY,JSON.stringify(attendanceData));
+      localStorage.setItem('trainingAttendanceData',JSON.stringify(attendanceData));
       const msg=document.getElementById('attendanceSaveMessage');
-      if(msg){msg.textContent='✓ Presenças guardadas';msg.style.display='inline-block';clearTimeout(window.__saveMsgTimer);window.__saveMsgTimer=setTimeout(()=>msg.style.display='none',1800);}
-    }catch(e){console.error(e);alert('Não foi possível guardar as presenças.');}
+      if(msg){
+        msg.textContent='✓ Presenças guardadas com sucesso';
+        msg.style.display='inline-block';
+        clearTimeout(window.__saveMsgTimer);
+        window.__saveMsgTimer=setTimeout(()=>msg.style.display='none',2200);
+      }
+    }catch(e){
+      console.error(e);
+      alert('Não foi possível guardar as presenças: '+e.message);
+    }
   };
-  window.saveAttendanceData=async function(){
-    if(!canEdit){alert('Entra primeiro no MODO ADMIN para guardar as presenças.');return;}
-    try{
-      await saveWeekToCloud();
-      const msg=document.getElementById('attendanceSaveMessage');
-      if(msg){msg.textContent='✓ Presenças guardadas';msg.style.display='inline-block';clearTimeout(window.__saveMsgTimer);window.__saveMsgTimer=setTimeout(()=>msg.style.display='none',1800);}
-    }catch(e){console.error(e);alert('Não foi possível guardar as presenças.');}
-  };
-  async function cycleStatus(player,date){if(!canEdit)return;const key=dateKey(date);if(!attendanceData[key])attendanceData[key]={};const current=currentStatus(player,date);const next=statusOrder[(statusOrder.indexOf(current)+1)%statusOrder.length];if(next==='empty')delete attendanceData[key][player];else attendanceData[key][player]=next;renderAttendance();try{await saveWeekToCloud();}catch(e){console.error(e);alert('Não foi possível guardar esta alteração.');}}
+
+  async function cycleStatus(player,date){if(!canEdit)return;const key=dateKey(date);if(!attendanceData[key])attendanceData[key]={};const current=currentStatus(player,date);const next=statusOrder[(statusOrder.indexOf(current)+1)%statusOrder.length];if(next==='empty')delete attendanceData[key][player];else attendanceData[key][player]=next;renderAttendance();try{localStorage.setItem(LOCAL_ATTENDANCE_KEY,JSON.stringify(attendanceData));localStorage.setItem('trainingAttendanceData',JSON.stringify(attendanceData));}catch(e){console.error(e);alert('Não foi possível guardar esta alteração.');}}
   window.cycleAttendanceCell=function(player,timestamp){cycleStatus(player,new Date(timestamp));};
   window.changeAttendanceWeek=function(days){attendanceWeekStart.setDate(attendanceWeekStart.getDate()+days);loadWeekFromCloud();};
   window.goAttendanceToday=function(){attendanceWeekStart=startOfSunday(new Date());loadWeekFromCloud();};
   window.clearAttendanceWeek=async function(){if(!canEdit)return;if(!confirm('Queres limpar todos os registos desta semana?'))return;attendanceData={};renderAttendance();try{await saveWeekToCloud();}catch(e){console.error(e);}};
   window.renderAttendance=renderAttendance;
   window.addEventListener('adminModeChanged', function(e){ canEdit=!!e.detail; if(canEdit){currentUser={email:'miguelrrangelo12@gmail.com',displayName:'Teddy'};} else {currentUser=null;} renderAttendance(); });
+  window.addEventListener('DOMContentLoaded',function(){
+    setTimeout(function(){loadWeekFromCloud();},100);
+  });
+
 
   function loadFirebaseScripts(){
     if(FIREBASE_CONFIG.apiKey.startsWith('COLOCA_AQUI')){setAuthUI();renderAttendance();return;}
