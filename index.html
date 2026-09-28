@@ -1786,7 +1786,7 @@
 
 </style>
 <style id="tournament-history-styles">
-.tournament-history-section{display:none;padding:100px 7%;background:#070707;min-height:70vh}
+.tournament-history-section{padding:100px 7%;background:#070707;min-height:70vh}
 .tournament-history-section.active{display:block}
 .tournament-history-section .section-header{margin-bottom:38px}
 .tournament-history-section .section-kicker{color:#ff6a00;font-size:9px;font-weight:900;letter-spacing:2px;margin-bottom:8px}
@@ -1871,6 +1871,23 @@
   .modal-club-placeholder{width:90px;height:90px}
   .modal-details{padding:0 18px 22px}
 }
+
+/* FINAL UI FIXES: tournament history + attendance */
+.tournament-history-section{min-height:calc(100vh - 78px);box-sizing:border-box;}
+.tournament-card{border:2px solid #ff6a00 !important;box-shadow:0 0 0 1px rgba(255,106,0,.12),0 18px 50px rgba(0,0,0,.35);}
+.attendance-table-wrap{border:2px solid #ff6a00 !important;box-shadow:0 0 0 1px rgba(255,106,0,.10);}
+.attendance-table th{color:#ff6a00 !important;}
+.attendance-player{font-weight:900 !important;color:#fff !important;}
+.match-modal-card{width:min(1080px,96vw) !important;max-height:94vh !important;border:2px solid #ff6a00 !important;}
+.match-modal-head h3{font-size:18px !important;}
+.match-modal-scoreboard{padding:42px 36px !important;}
+.modal-final-score strong{font-size:72px !important;}
+.modal-event{border-color:#2a2a2a !important;padding:16px 18px !important;}
+.modal-event .goal-player{color:#ff6a00 !important;font-weight:900;}
+.modal-event .assist-player{color:#38a8ff !important;font-weight:900;}
+.modal-event .event-label{color:#777 !important;font-size:9px !important;font-weight:900 !important;letter-spacing:1px;}
+.tournament-game:focus-visible{outline:2px solid #ff6a00;outline-offset:-2px;}
+@media(max-width:700px){.modal-final-score strong{font-size:52px !important;}.match-modal-card{width:100% !important;}}
 </style>
 <style id="admin-pin-styles">
 #adminLoginBtn {
@@ -1989,7 +2006,7 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
                 <a href="#" class="disabled" onclick="return false;">HISTÓRICO DE LIGAS</a>
                 <div class="competition-dropdown-title">TORNEIOS</div>
                 <a href="https://discord.gg/kj3EvDWaH" target="_blank" rel="noopener noreferrer">PFVL</a>
-                <a href="#torneios-historico" onclick="event.preventDefault(); var s=document.getElementById('torneios-historico'); if(s){s.classList.add('active'); s.style.display='block';} var m=document.getElementById('competitionMenu'); if(m)m.classList.remove('open'); setTimeout(function(){if(s)s.scrollIntoView({behavior:'smooth',block:'start'});},30); return false;">HISTÓRICO DE TORNEIOS</a>
+                <a href="#torneios-historico" onclick="event.preventDefault(); showTournamentHistory(); return false;">HISTÓRICO DE TORNEIOS</a>
             </div>
         </div>
 
@@ -3946,7 +3963,7 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
 
 
 
-<section id="torneios-historico" class="tournament-history-section">
+<main id="torneios-historico" class="page tournament-history-section">
   <div class="section-header">
     <div class="section-kicker">COMPETIÇÕES</div>
     <h2>HISTÓRICO DE TORNEIOS</h2>
@@ -3986,7 +4003,7 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
       <span>GOLOS NO TORNEIO</span><strong>Nightface <b>4</b></strong><strong>Teddy <b>3</b></strong><strong>Pedro <b>1</b></strong><strong>Dolly <b>1</b></strong><strong>Auto golo <b>1</b></strong>
     </div>
   </div>
-</section>
+</main>
 
 <div class="match-modal" id="matchModal" aria-hidden="true">
   <div class="match-modal-card" role="dialog" aria-modal="true" aria-labelledby="matchModalTitle">
@@ -4002,7 +4019,11 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
 </div>
 
 <script>
-/* PRESENÇAS + GOOGLE LOGIN + FIRESTORE */
+/* =========================================================
+   PRESENÇAS + GOOGLE LOGIN + FIRESTORE — versão final
+   Teddy é o único editor; restantes utilizadores autenticados
+   apenas conseguem consultar.
+========================================================= */
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCod7SzeI25LeY_S2f5W4YBKcI7pzJaJNY",
   authDomain: "nextgen-united.firebaseapp.com",
@@ -4013,128 +4034,167 @@ const FIREBASE_CONFIG = {
 };
 const ADMIN_EMAIL = "miguelrrangelo12@gmail.com";
 
-(function(){
-  const statusOrder=['empty','present','late','absent','unexcused'];
-  const statusText={empty:'SEM REGISTO',present:'PRESENÇA',late:'ATRASO',absent:'FALTA',unexcused:'SEM AVISO'};
-  const dayNames=['DOM','SEG','TER','QUA','QUI'];
-  let attendanceWeekStart=startOfSunday(new Date());
-  let attendanceData={};
-  let currentUser=null;
-  let canEdit=false;
-  let cloudReady=false;
+(function () {
+  const order = ['empty','present','late','absent','unexcused'];
+  const labels = {empty:'SEM REGISTO', present:'PRESENÇA', late:'ATRASO', absent:'FALTA', unexcused:'FALTA SEM AVISO'};
+  const days = ['DOM','SEG','TER','QUA','QUI'];
+  let weekStart = startOfSunday(new Date());
+  let data = {};
+  let currentUser = null;
+  let canEdit = false;
+  let firebaseReady = false;
 
-  function startOfSunday(date){const d=new Date(date.getFullYear(),date.getMonth(),date.getDate());d.setDate(d.getDate()-d.getDay());return d;}
-  function dateKey(date){return date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');}
-  function formatDate(date){return String(date.getDate()).padStart(2,'0')+'/'+String(date.getMonth()+1).padStart(2,'0');}
-  function formatWeekLabel(){const end=new Date(attendanceWeekStart);end.setDate(end.getDate()+4);return 'TREINOS · '+formatDate(attendanceWeekStart)+' — '+formatDate(end);}
-  function getPlayers(){if(typeof playersData!=='undefined')return Object.keys(playersData);return ['MOSCA','NIGHTFACE','MJ_','BANJAQUI','LOURO','TXUBAS','DIOGO','GB','SALES','DUDA','RAFAEL','WOLF','KERMIT','ROGERIO','PEDRO','DOLLY','MARTINS','TEDDY'];}
-  function displayPlayerName(name){return name==='MJ_'?'MJ':name;}
-  function playerPosition(name){if(typeof playersData!=='undefined'&&playersData[name])return playersData[name].position;return '';}
-  function currentStatus(player,date){const key=dateKey(date);return(attendanceData[key]&&attendanceData[key][player])||'empty';}
-  function setAuthUI(){
+  function startOfSunday(d){
+    const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    x.setDate(x.getDate() - x.getDay());
+    return x;
+  }
+  function key(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function dateLabel(d){ return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0'); }
+  function players(){
+    return (typeof playersData !== 'undefined' && playersData) ? Object.keys(playersData) : ['MOSCA','NIGHTFACE','MJ_','BANJAQUI','LOURO','TXUBAS','DIOGO','GB','SALES','DUDA','RAFAEL','WOLF','KERMIT','ROGERIO','PEDRO','DOLLY','MARTINS','TEDDY'];
+  }
+  function pname(n){ return n === 'MJ_' ? 'MJ' : n; }
+  function pos(n){ return (typeof playersData !== 'undefined' && playersData[n]) ? (playersData[n].position || '') : ''; }
+  function status(n,d){ return (data[key(d)] && data[key(d)][n]) || 'empty'; }
+  function weekLabel(){ const e=new Date(weekStart); e.setDate(e.getDate()+4); return 'TREINOS · '+dateLabel(weekStart)+' — '+dateLabel(e); }
+
+  function authBox(){
     let box=document.getElementById('attendanceAuthBox');
     if(!box){
-      box=document.createElement('div');box.id='attendanceAuthBox';box.style.cssText='margin:0 0 18px;padding:14px 16px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;';
+      box=document.createElement('div'); box.id='attendanceAuthBox';
+      box.style.cssText='margin:0 0 18px;padding:14px 16px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;';
       const wrap=document.querySelector('#presencas .attendance-wrap'); if(wrap) wrap.insertBefore(box,wrap.firstElementChild);
     }
-    if(!currentUser){box.innerHTML='<div><strong>🔒 Presenças protegidas</strong><br><span style="opacity:.7">Só o Teddy pode alterar os registos.</span></div><button class="attendance-btn" id="googleLoginBtn" type="button">ENTRAR COM GOOGLE</button>';document.getElementById('googleLoginBtn').onclick=googleLogin;}
-    else {const role=currentUser.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase()?'ADMIN':'CONSULTA';box.innerHTML='<div><strong>👤 '+(currentUser.displayName||currentUser.email)+'</strong><br><span style="opacity:.7">Modo '+role+(canEdit?' · pode editar':' · apenas consulta')+'</span></div><button class="attendance-btn" type="button" id="googleLogoutBtn">SAIR</button>';document.getElementById('googleLogoutBtn').onclick=googleLogout;}
-  }
-  function renderAttendance(){
-    const label=document.getElementById('attendanceWeekLabel'),head=document.getElementById('attendanceHead'),body=document.getElementById('attendanceBody');if(!label||!head||!body)return;
-    label.textContent=formatWeekLabel();let h='<tr><th>JOGADOR</th>';for(let i=0;i<5;i++){const d=new Date(attendanceWeekStart);d.setDate(d.getDate()+i);h+='<th>'+dayNames[i]+'<br><span style="opacity:.55">'+formatDate(d)+'</span></th>';}h+='<th>RESUMO</th></tr>';head.innerHTML=h;
-    body.innerHTML=getPlayers().map(function(player){let row='<tr><td class="attendance-player">'+displayPlayerName(player)+'<span class="attendance-pos">'+playerPosition(player)+'</span></td>';const counts={present:0,late:0,absent:0,unexcused:0};for(let i=0;i<5;i++){const d=new Date(attendanceWeekStart);d.setDate(d.getDate()+i);const st=currentStatus(player,d);if(counts[st]!==undefined)counts[st]++;const click=canEdit?'onclick="cycleAttendanceCell(\''+player.replace(/'/g,"\\'")+'\','+d.getTime()+')"':'';row+='<td class="attendance-cell" title="'+statusText[st]+'" '+click+'><span class="attendance-dot '+st+'"></span><span class="attendance-status-text">'+statusText[st]+'</span></td>';}row+='<td><div class="attendance-summary"><span class="attendance-mini">🟢 '+counts.present+'</span><span class="attendance-mini">🟡 '+counts.late+'</span><span class="attendance-mini">🔴 '+counts.absent+'</span><span class="attendance-mini">🟣 '+counts.unexcused+'</span></div></td></tr>';return row;}).join('');
-    setAuthUI();
-  }
-  async function googleLogin(){if(!cloudReady){alert('O login ainda não está configurado. É preciso ligar este site ao projeto Firebase.');return;}try{const provider=new firebase.auth.GoogleAuthProvider();await firebase.auth().signInWithPopup(provider);}catch(e){alert('Não foi possível entrar com Google: '+e.message);}}
-  async function googleLogout(){if(window.firebase)await firebase.auth().signOut();}
-
-  async function loadWeekFromCloud(){
-    try{
-      if(cloudReady && window.firebase && firebase.auth().currentUser){
-        const weekId=dateKey(attendanceWeekStart);
-        const snap=await firebase.firestore().collection('presencas').doc(weekId).get();
-        attendanceData=snap.exists ? (snap.data().data || {}) : {};
-      } else {
-        attendanceData={};
-      }
-    }catch(e){
-      attendanceData={};
-      console.error('Erro a carregar presenças:',e);
+    if(!currentUser){
+      box.innerHTML='<div><strong>🔒 Presenças protegidas</strong><br><span style="opacity:.7">Entra com Google para consultar. Só o Teddy pode alterar.</span></div><button class="attendance-btn" type="button" id="googleLoginBtn">ENTRAR COM GOOGLE</button>';
+      document.getElementById('googleLoginBtn').onclick=login;
+    } else {
+      const admin=canEdit;
+      box.innerHTML='<div><strong>👤 '+escapeHtml(currentUser.displayName||currentUser.email||'Utilizador')+'</strong><br><span style="opacity:.7">'+(admin?'ADMIN · pode editar e guardar':'CONSULTA · apenas visualização')+'</span></div><button class="attendance-btn" type="button" id="googleLogoutBtn">SAIR</button>';
+      document.getElementById('googleLogoutBtn').onclick=logout;
     }
-    renderAttendance();
+  }
+  function escapeHtml(v){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+
+  function render(){
+    const label=document.getElementById('attendanceWeekLabel'), head=document.getElementById('attendanceHead'), body=document.getElementById('attendanceBody');
+    if(!label||!head||!body) return;
+    label.textContent=weekLabel();
+    let h='<tr><th>JOGADOR</th>';
+    for(let i=0;i<5;i++){const d=new Date(weekStart);d.setDate(d.getDate()+i);h+='<th>'+days[i]+'<br><span style="opacity:.55">'+dateLabel(d)+'</span></th>';}
+    h+='<th>RESUMO</th></tr>'; head.innerHTML=h;
+    const list=players();
+    body.innerHTML=list.map(n=>{
+      const c={present:0,late:0,absent:0,unexcused:0};
+      let row='<tr><td class="attendance-player">'+escapeHtml(pname(n))+'<span class="attendance-pos">'+escapeHtml(pos(n))+'</span></td>';
+      for(let i=0;i<5;i++){
+        const d=new Date(weekStart);d.setDate(d.getDate()+i);const st=status(n,d);if(c[st]!==undefined)c[st]++;
+        const onclick=canEdit?' onclick="cycleAttendanceCell(\''+n.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\','+d.getTime()+')"':'';
+        row+='<td class="attendance-cell"'+onclick+' title="'+labels[st]+'"><span class="attendance-dot '+st+'"></span><span class="attendance-status-text">'+labels[st]+'</span></td>';
+      }
+      row+='<td><div class="attendance-summary"><span class="attendance-mini">🟢 '+c.present+'</span><span class="attendance-mini">🟡 '+c.late+'</span><span class="attendance-mini">🔴 '+c.absent+'</span><span class="attendance-mini">🟣 '+c.unexcused+'</span></div></td></tr>';
+      return row;
+    }).join('');
+    authBox();
   }
 
-  async function saveWeekToCloud(){
-    if(!canEdit)return;
+  async function login(){
+    if(!firebaseReady){alert('O Firebase ainda está a carregar. Tenta novamente em alguns segundos.');return;}
+    try{await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());}
+    catch(e){alert('Não foi possível entrar com Google: '+(e.message||e));}
+  }
+  async function logout(){try{await firebase.auth().signOut();}catch(e){console.error(e);}}
+
+  async function load(){
+    if(!currentUser || !firebaseReady){data={};render();return;}
     try{
-      if(cloudReady && window.firebase && firebase.auth().currentUser){
-        const weekId=dateKey(attendanceWeekStart);
-        await firebase.firestore().collection('presencas').doc(weekId).set({data:attendanceData,updatedAt:firebase.firestore.FieldValue.serverTimestamp(),updatedBy:firebase.auth().currentUser.email},{merge:true});
-      }
-    }catch(e){
-      console.error('Erro a guardar presenças:',e);
-      throw e;
-    }
+      const snap=await firebase.firestore().collection('presencas').doc(key(weekStart)).get();
+      data=snap.exists ? (snap.data().data || {}) : {};
+    }catch(e){console.error(e);data={};}
+    render();
+  }
+  async function save(){
+    if(!canEdit) throw new Error('Apenas o Teddy pode guardar presenças.');
+    if(!firebaseReady || !currentUser) throw new Error('É necessário entrar com a conta Google do Teddy.');
+    await firebase.firestore().collection('presencas').doc(key(weekStart)).set({data:data,updatedAt:firebase.firestore.FieldValue.serverTimestamp(),updatedBy:currentUser.email},{merge:true});
   }
 
   window.saveAttendanceData=async function(){
-    if(!canEdit){
-      alert('Entra com a conta Google do Teddy para guardar as presenças.');
-      return;
-    }
     try{
-      await saveWeekToCloud();
-      const msg=document.getElementById('attendanceSaveMessage');
-      if(msg){
-        msg.textContent='✓ Presenças guardadas com sucesso';
-        msg.style.display='inline-block';
-        clearTimeout(window.__saveMsgTimer);
-        window.__saveMsgTimer=setTimeout(()=>msg.style.display='none',2200);
-      }
-    }catch(e){
-      console.error(e);
-      alert('Não foi possível guardar as presenças: '+e.message);
-    }
+      await save();
+      const m=document.getElementById('attendanceSaveMessage');
+      if(m){m.textContent='✓ Presenças guardadas';m.style.display='inline-block';setTimeout(()=>m.style.display='none',2200);}
+    }catch(e){alert(e.message||'Não foi possível guardar.');}
+  };
+  window.cycleAttendanceCell=async function(player,timestamp){
+    if(!canEdit)return;
+    const d=new Date(timestamp),k=key(d);if(!data[k])data[k]={};
+    const next=order[(order.indexOf(status(player,d))+1)%order.length];
+    if(next==='empty')delete data[k][player];else data[k][player]=next;
+    render();
+    try{await save();}catch(e){console.error(e);alert(e.message||'Erro ao guardar.');await load();}
+  };
+  window.changeAttendanceWeek=function(delta){weekStart.setDate(weekStart.getDate()+delta);load();};
+  window.goAttendanceToday=function(){weekStart=startOfSunday(new Date());load();};
+  window.clearAttendanceWeek=async function(){
+    if(!canEdit)return;
+    if(!confirm('Queres limpar todos os registos desta semana?'))return;
+    data={};render();try{await save();}catch(e){alert(e.message||'Erro ao guardar.');}
   };
 
-  async function cycleStatus(player,date){if(!canEdit)return;const key=dateKey(date);if(!attendanceData[key])attendanceData[key]={};const current=currentStatus(player,date);const next=statusOrder[(statusOrder.indexOf(current)+1)%statusOrder.length];if(next==='empty')delete attendanceData[key][player];else attendanceData[key][player]=next;renderAttendance();try{await saveWeekToCloud();}catch(e){console.error(e);alert('Não foi possível guardar esta alteração: '+e.message);}}
-  window.cycleAttendanceCell=function(player,timestamp){cycleStatus(player,new Date(timestamp));};
-  window.changeAttendanceWeek=function(days){attendanceWeekStart.setDate(attendanceWeekStart.getDate()+days);loadWeekFromCloud();};
-  window.goAttendanceToday=function(){attendanceWeekStart=startOfSunday(new Date());loadWeekFromCloud();};
-  window.clearAttendanceWeek=async function(){if(!canEdit)return;if(!confirm('Queres limpar todos os registos desta semana?'))return;attendanceData={};renderAttendance();try{await saveWeekToCloud();}catch(e){console.error(e);}};
-  window.renderAttendance=renderAttendance; if(canEdit){currentUser={email:'miguelrrangelo12@gmail.com',displayName:'Teddy'};} else {currentUser=null;} renderAttendance(); });
-  window.addEventListener('DOMContentLoaded',function(){
-    setTimeout(function(){loadWeekFromCloud();},100);
-  });
-
-
-  function loadFirebaseScripts(){
-        const a=document.createElement('script');a.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js';a.onload=function(){
-      const b=document.createElement('script');b.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js';b.onload=function(){
-        const c=document.createElement('script');c.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js';c.onload=function(){
-          firebase.initializeApp(FIREBASE_CONFIG);cloudReady=true;
-          firebase.auth().onAuthStateChanged(async function(user){currentUser=user;const email=(user?.email||'').toLowerCase();canEdit=!!user&&(email===ADMIN_EMAIL.toLowerCase());await loadWeekFromCloud();});
-        };document.head.appendChild(c);
+  function loadFirebase(){
+    const a=document.createElement('script');a.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js';
+    a.onload=()=>{const b=document.createElement('script');b.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js';
+      b.onload=()=>{const c=document.createElement('script');c.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js';
+        c.onload=()=>{firebase.initializeApp(FIREBASE_CONFIG);firebaseReady=true;firebase.auth().onAuthStateChanged(async u=>{currentUser=u;canEdit=!!u&&(String(u.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase());await load();});};document.head.appendChild(c);
       };document.head.appendChild(b);
     };document.head.appendChild(a);
   }
-  loadFirebaseScripts();
+  document.addEventListener('DOMContentLoaded',()=>{render();loadFirebase();});
 })();
 
-// Abre o histórico de torneios a partir do menu COMPETIÇÕES.
-// Esta função fica no âmbito global porque é chamada pelo onclick do link.
-function openTournamentHistory(event) {
-  if (event) event.preventDefault();
-  var section = document.getElementById("torneios-historico");
-  if (!section) return false;
-  section.classList.add("active");
-  section.style.display = "block";
-  var competitionMenu = document.getElementById("competitionMenu");
-  if (competitionMenu) competitionMenu.classList.remove("open");
-  setTimeout(function(){ section.scrollIntoView({behavior:"smooth", block:"start"}); }, 30);
-  return false;
+/* =========================================================
+   HISTÓRICO DE TORNEIOS — navegação e jogos
+========================================================= */
+function showTournamentHistory(){
+  const menu=document.getElementById('competitionMenu'); if(menu)menu.classList.remove('open');
+  const pages=document.querySelectorAll('.page'); pages.forEach(p=>p.classList.remove('active'));
+  const section=document.getElementById('torneios-historico'); if(section)section.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
+
+const MATCHES={
+  1:{opponent:'MARITIMO SC',score:'3–1',result:'VITÓRIA',away:'MSC',goals:['Pedro','Dolly','Auto golo'],assists:[],note:'Vitória por 3–1.'},
+  2:{opponent:'VALE DO DOURO DC',score:'1–0',result:'VITÓRIA',away:'VDC',goals:['Teddy'],assists:['Pedro'],note:'Teddy marcou; Pedro registou a assistência.'},
+  3:{opponent:'R DAS FONTES FC',score:'6–0',result:'VITÓRIA',away:'RDF',goals:['Nightface ×4','Teddy ×2'],assists:[],note:'Vitória por 6–0.'},
+  4:{opponent:'VISEU ESPORTS',score:'0–0',penalty:'7–8 nos penáltis',result:'DERROTA',away:'VSE',goals:[],assists:[],note:'Empate 0–0 no tempo de jogo; derrota 7–8 nos penáltis.'}
+};
+function openMatch(id){
+  const m=MATCHES[id];if(!m)return;
+  document.getElementById('modalAwayName').textContent=m.opponent;
+  document.getElementById('modalAwayVisual').textContent=m.away;
+  document.getElementById('modalScore').textContent=m.score;
+  document.getElementById('modalPenalty').textContent=m.penalty||'';
+  document.getElementById('modalResult').textContent=m.result;
+  const dot=document.getElementById('modalResultDot');dot.className='result-dot '+(m.result==='DERROTA'?'result-dot-loss':'result-dot-win');
+  const events=document.getElementById('modalEvents');
+  let html='';
+  m.goals.forEach(g=>{html+='<div class="modal-event"><strong><span class="event-label">GOLO</span> <span class="goal-player">'+escapeModal(g)+'</span></strong><span class="goal-player">⚽</span></div>';});
+  m.assists.forEach(a=>{html+='<div class="modal-event"><strong><span class="event-label">ASSISTÊNCIA</span> <span class="assist-player">'+escapeModal(a)+'</span></strong><span class="assist-player">🔵</span></div>';});
+  if(!html)html='<div class="modal-event"><strong>'+ (m.penalty?'SEM GOLOS · DECISÃO NOS PENÁLTIS':'SEM OUTROS EVENTOS REGISTADOS') +'</strong></div>';
+  events.innerHTML=html;document.getElementById('modalNote').textContent=m.note||'';
+  const modal=document.getElementById('matchModal');modal.classList.add('active');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+}
+function escapeModal(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function closeMatch(){const m=document.getElementById('matchModal');m.classList.remove('active');m.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.tournament-game').forEach(btn=>btn.addEventListener('click',()=>openMatch(btn.dataset.match)));
+  const close=document.getElementById('matchModalClose');if(close)close.addEventListener('click',closeMatch);
+  const modal=document.getElementById('matchModal');if(modal)modal.addEventListener('click',e=>{if(e.target===modal)closeMatch();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMatch();});
+});
 </script>
 
 
