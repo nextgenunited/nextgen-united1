@@ -544,8 +544,57 @@
             border-color: #3a3a3a;
         }
 
+        /* FOTO DOS JOGADORES */
+
+        .player-photo-box {
+            width: 105px;
+            height: 105px;
+
+            flex-shrink: 0;
+
+            position: relative;
+
+            background: #111;
+
+            border-right: 1px solid #222;
+
+            overflow: hidden;
+        }
+
+        .player-photo {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .player-photo-placeholder {
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #111;
+
+            color: #333;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
         .player-number {
-            width: 80px;
+            width: 65px;
+
+            flex-shrink: 0;
 
             display: flex;
 
@@ -1424,6 +1473,14 @@
 
                 <div class="player-card goalkeeper">
 
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Mosca.jpg"
+                            alt="MOSCA"
+                        >
+                    </div>
+
                     <div class="player-number">
                         99
                     </div>
@@ -1438,6 +1495,14 @@
 
                 <div class="player-card goalkeeper">
 
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="nightface.jpg"
+                            alt="NIGHTFACE"
+                        >
+                    </div>
+
                     <div class="player-number">
                         1
                     </div>
@@ -1451,6 +1516,14 @@
 
 
                 <div class="player-card goalkeeper">
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="MJ.jpg"
+                            alt="MJ_"
+                        >
+                    </div>
 
                     <div class="player-number">
                         12
@@ -1482,56 +1555,130 @@
             <div class="players">
 
                 <div class="player-card defender">
-                    <div class="player-number">2</div>
+
+                    <div class="player-photo-box">
+                        <div class="player-photo-placeholder">
+                            FOTO
+                        </div>
+                    </div>
+
+                    <div class="player-number">
+                        2
+                    </div>
+
                     <div class="player-info">
                         <h3>BANJAQUI</h3>
                         <p>DD</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card defender">
-                    <div class="player-number">5</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Louro.jpg"
+                            alt="LOURO"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        5
+                    </div>
+
                     <div class="player-info">
                         <h3>LOURO</h3>
                         <p>DC</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card defender">
-                    <div class="player-number">23</div>
+
+                    <div class="player-photo-box">
+                        <div class="player-photo-placeholder">
+                            FOTO
+                        </div>
+                    </div>
+
+                    <div class="player-number">
+                        23
+                    </div>
+
                     <div class="player-info">
                         <h3>TXUBAS</h3>
                         <p>DD</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card defender">
-                    <div class="player-number">4</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="diogo.jpg"
+                            alt="DIOGO"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        4
+                    </div>
+
                     <div class="player-info">
                         <h3>DIOGO</h3>
                         <p>DC</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card defender">
-                    <div class="player-number">18</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="GB.jpg"
+                            alt="GB"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        18
+                    </div>
+
                     <div class="player-info">
                         <h3>GB</h3>
                         <p>DC</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card defender">
-                    <div class="player-number">15</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Sales.jpg"
+                            alt="SALES"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        15
+                    </div>
+
                     <div class="player-info">
                         <h3>SALES</h3>
                         <p>DC</p>
                     </div>
+
                 </div>
 
             </div>
@@ -1553,65 +1700,156 @@
             <div class="players">
 
                 <div class="player-card midfielder">
-                    <div class="player-number">16</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="duda.jpg"
+                            alt="DUDA"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        16
+                    </div>
+
                     <div class="player-info">
                         <h3>DUDA</h3>
                         <p>MC</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card midfielder">
-                    <div class="player-number">20</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Rafa.jpg"
+                            alt="RAFAEL"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        20
+                    </div>
+
                     <div class="player-info">
                         <h3>RAFAEL</h3>
                         <p>MC</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card midfielder">
-                    <div class="player-number">45</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Wolf.jpg"
+                            alt="WOLF"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        45
+                    </div>
+
                     <div class="player-info">
                         <h3>WOLF</h3>
                         <p>MC</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card midfielder">
-                    <div class="player-number">36</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Kermit.jpg"
+                            alt="KERMIT"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        36
+                    </div>
+
                     <div class="player-info">
                         <h3>KERMIT</h3>
                         <p>MC</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card midfielder">
-                    <div class="player-number">65</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Rogerio.jpg"
+                            alt="ROGERIO"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        65
+                    </div>
+
                     <div class="player-info">
                         <h3>ROGERIO</h3>
                         <p>MD</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card midfielder">
-                    <div class="player-number">69</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="pedro.jpg"
+                            alt="PEDRO"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        69
+                    </div>
+
                     <div class="player-info">
                         <h3>PEDRO</h3>
                         <p>ME</p>
                     </div>
+
                 </div>
 
 
                 <div class="player-card midfielder">
-                    <div class="player-number">78</div>
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Dolly.jpg"
+                            alt="DOLLY"
+                        >
+                    </div>
+
+                    <div class="player-number">
+                        78
+                    </div>
+
                     <div class="player-info">
                         <h3>DOLLY</h3>
                         <p>ME</p>
                     </div>
+
                 </div>
 
             </div>
@@ -1634,6 +1872,14 @@
 
                 <div class="player-card attacker president">
 
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Martins.jpg"
+                            alt="MARTINS"
+                        >
+                    </div>
+
                     <div class="player-number">
                         10
                     </div>
@@ -1651,6 +1897,14 @@
 
 
                 <div class="player-card attacker captain">
+
+                    <div class="player-photo-box">
+                        <img
+                            class="player-photo"
+                            src="Teddy.jpg"
+                            alt="TEDDY"
+                        >
+                    </div>
 
                     <div class="player-number">
                         9
