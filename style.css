@@ -469,3 +469,75 @@ footer p {
         text-align: center;
     }
 }
+/* POSIÇÕES */
+
+.position-title {
+    max-width: 1100px;
+    margin: 60px auto 20px;
+
+    color: #ff6a00;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    border-left: 4px solid #ff6a00;
+
+    padding-left: 14px;
+}
+
+
+/* CAPITÃO */
+
+.player.captain {
+    border-color: #ff6a00;
+}
+
+.player.captain::after {
+    content: "CAPITÃO";
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    background: #ff6a00;
+    color: #fff;
+
+    padding: 6px 9px;
+
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+/* PRESIDENTE */
+
+.player.president {
+    border-color: #444;
+}
+
+.player.president::after {
+    content: "PRESIDENTE";
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    background: #fff;
+    color: #000;
+
+    padding: 6px 9px;
+
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+/* NECESSÁRIO PARA OS BADGES */
+
+.player {
+    position: relative;
+}
