@@ -534,6 +534,8 @@
             overflow: hidden;
 
             transition: 0.2s ease;
+
+            cursor: pointer;
         }
 
         .player-card:hover {
@@ -543,6 +545,7 @@
 
             border-color: #3a3a3a;
         }
+
 
         /* FOTO DOS JOGADORES */
 
@@ -717,6 +720,326 @@
 
         .captain-role {
             color: #d6a928;
+        }
+
+
+        /* =========================
+           PERFIL DO JOGADOR
+        ========================= */
+
+        .player-modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 5000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+
+            background: rgba(0,0,0,0.88);
+
+            backdrop-filter: blur(8px);
+        }
+
+        .player-modal.active {
+            display: flex;
+        }
+
+        .player-modal-content {
+            position: relative;
+
+            width: 100%;
+            max-width: 1000px;
+
+            min-height: 560px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            background:
+                radial-gradient(
+                    circle at 20% 50%,
+                    rgba(255,106,0,0.12),
+                    transparent 40%
+                ),
+                #0a0a0a;
+
+            border: 1px solid #303030;
+
+            box-shadow:
+                0 30px 100px rgba(0,0,0,0.7);
+
+            overflow: hidden;
+        }
+
+        .player-modal-close {
+            position: absolute;
+
+            top: 18px;
+            right: 18px;
+
+            z-index: 5;
+
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #111;
+
+            border: 1px solid #333;
+
+            color: #aaa;
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .player-modal-close:hover {
+            background: #ff6a00;
+
+            border-color: #ff6a00;
+
+            color: #000;
+        }
+
+        .player-modal-photo {
+            position: relative;
+
+            min-height: 560px;
+
+            display: flex;
+
+            align-items: flex-end;
+            justify-content: center;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #111,
+                    #080808
+                );
+
+            border-right: 1px solid #222;
+        }
+
+        .player-modal-photo::before {
+            content: "";
+
+            position: absolute;
+
+            width: 430px;
+            height: 430px;
+
+            border: 1px solid #333;
+
+            border-radius: 50%;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%,-50%);
+        }
+
+        .player-modal-photo::after {
+            content: "";
+
+            position: absolute;
+
+            width: 330px;
+            height: 330px;
+
+            border: 1px solid #ff6a00;
+
+            border-radius: 50%;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%,-50%);
+
+            opacity: 0.45;
+        }
+
+        .modal-player-image {
+            position: relative;
+
+            z-index: 2;
+
+            width: 88%;
+            height: 88%;
+
+            object-fit: contain;
+
+            object-position: center bottom;
+
+            filter: drop-shadow(
+                0 20px 30px rgba(0,0,0,0.7)
+            );
+        }
+
+        .modal-photo-placeholder {
+            position: relative;
+
+            z-index: 2;
+
+            width: 70%;
+            height: 70%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #333;
+
+            font-size: 35px;
+
+            font-weight: 900;
+
+            letter-spacing: 5px;
+        }
+
+        .player-modal-info {
+            padding: 65px 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .modal-eyebrow {
+            color: #ff6a00;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+        }
+
+        .modal-player-name {
+            font-size: clamp(42px,5vw,72px);
+
+            line-height: 0.9;
+
+            font-weight: 900;
+
+            letter-spacing: -3px;
+        }
+
+        .modal-player-position {
+            margin-top: 15px;
+
+            color: #777;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+        .modal-player-role {
+            display: inline-block;
+
+            width: fit-content;
+
+            margin-top: 14px;
+
+            padding: 8px 12px;
+
+            background: #151515;
+
+            border: 1px solid #333;
+
+            color: #ff6a00;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+        }
+
+        .modal-number {
+            margin-top: 28px;
+
+            color: #333;
+
+            font-size: 80px;
+
+            line-height: 0.8;
+
+            font-weight: 900;
+        }
+
+        .modal-stats {
+            display: grid;
+
+            grid-template-columns: repeat(2,1fr);
+
+            gap: 10px;
+
+            margin-top: 30px;
+        }
+
+        .modal-stat {
+            min-height: 90px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            padding: 15px 18px;
+
+            background: #101010;
+
+            border: 1px solid #242424;
+
+            border-left: 3px solid #ff6a00;
+        }
+
+        .modal-stat strong {
+            color: #fff;
+
+            font-size: 30px;
+
+            font-weight: 900;
+        }
+
+        .modal-stat span {
+            margin-top: 5px;
+
+            color: #555;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
         }
 
 
@@ -1227,6 +1550,66 @@
                 border-bottom: none;
             }
 
+
+            /* PERFIL MOBILE */
+
+            .player-modal {
+                padding: 15px;
+            }
+
+            .player-modal-content {
+                max-height: 90vh;
+
+                overflow-y: auto;
+
+                grid-template-columns: 1fr;
+
+                min-height: auto;
+            }
+
+            .player-modal-photo {
+                min-height: 340px;
+
+                height: 340px;
+
+                border-right: none;
+
+                border-bottom: 1px solid #222;
+            }
+
+            .player-modal-photo::before {
+                width: 260px;
+                height: 260px;
+            }
+
+            .player-modal-photo::after {
+                width: 200px;
+                height: 200px;
+            }
+
+            .modal-player-image {
+                width: 80%;
+                height: 90%;
+            }
+
+            .player-modal-info {
+                padding: 35px 25px 40px;
+            }
+
+            .modal-player-name {
+                font-size: 45px;
+            }
+
+            .modal-number {
+                font-size: 60px;
+
+                margin-top: 20px;
+            }
+
+            .modal-stats {
+                margin-top: 20px;
+            }
+
         }
 
 
@@ -1252,6 +1635,10 @@
             .main-button,
             .second-button {
                 width: 100%;
+            }
+
+            .modal-stats {
+                grid-template-columns: 1fr;
             }
 
         }
@@ -1471,7 +1858,10 @@
 
             <div class="players">
 
-                <div class="player-card goalkeeper">
+                <div
+                    class="player-card goalkeeper"
+                    onclick="openPlayer('MOSCA')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1493,7 +1883,10 @@
                 </div>
 
 
-                <div class="player-card goalkeeper">
+                <div
+                    class="player-card goalkeeper"
+                    onclick="openPlayer('NIGHTFACE')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1515,7 +1908,10 @@
                 </div>
 
 
-                <div class="player-card goalkeeper">
+                <div
+                    class="player-card goalkeeper"
+                    onclick="openPlayer('MJ_')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1554,7 +1950,10 @@
 
             <div class="players">
 
-                <div class="player-card defender">
+                <div
+                    class="player-card defender"
+                    onclick="openPlayer('BANJAQUI')"
+                >
 
                     <div class="player-photo-box">
                         <div class="player-photo-placeholder">
@@ -1574,7 +1973,10 @@
                 </div>
 
 
-                <div class="player-card defender">
+                <div
+                    class="player-card defender"
+                    onclick="openPlayer('LOURO')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1596,7 +1998,10 @@
                 </div>
 
 
-                <div class="player-card defender">
+                <div
+                    class="player-card defender"
+                    onclick="openPlayer('TXUBAS')"
+                >
 
                     <div class="player-photo-box">
                         <div class="player-photo-placeholder">
@@ -1616,7 +2021,10 @@
                 </div>
 
 
-                <div class="player-card defender">
+                <div
+                    class="player-card defender"
+                    onclick="openPlayer('DIOGO')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1638,7 +2046,10 @@
                 </div>
 
 
-                <div class="player-card defender">
+                <div
+                    class="player-card defender"
+                    onclick="openPlayer('GB')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1660,7 +2071,10 @@
                 </div>
 
 
-                <div class="player-card defender">
+                <div
+                    class="player-card defender"
+                    onclick="openPlayer('SALES')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1699,7 +2113,10 @@
 
             <div class="players">
 
-                <div class="player-card midfielder">
+                <div
+                    class="player-card midfielder"
+                    onclick="openPlayer('DUDA')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1721,7 +2138,10 @@
                 </div>
 
 
-                <div class="player-card midfielder">
+                <div
+                    class="player-card midfielder"
+                    onclick="openPlayer('RAFAEL')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1743,7 +2163,10 @@
                 </div>
 
 
-                <div class="player-card midfielder">
+                <div
+                    class="player-card midfielder"
+                    onclick="openPlayer('WOLF')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1765,7 +2188,10 @@
                 </div>
 
 
-                <div class="player-card midfielder">
+                <div
+                    class="player-card midfielder"
+                    onclick="openPlayer('KERMIT')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1787,7 +2213,10 @@
                 </div>
 
 
-                <div class="player-card midfielder">
+                <div
+                    class="player-card midfielder"
+                    onclick="openPlayer('ROGERIO')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1809,7 +2238,10 @@
                 </div>
 
 
-                <div class="player-card midfielder">
+                <div
+                    class="player-card midfielder"
+                    onclick="openPlayer('PEDRO')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1831,7 +2263,10 @@
                 </div>
 
 
-                <div class="player-card midfielder">
+                <div
+                    class="player-card midfielder"
+                    onclick="openPlayer('DOLLY')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1870,7 +2305,10 @@
 
             <div class="players">
 
-                <div class="player-card attacker president">
+                <div
+                    class="player-card attacker president"
+                    onclick="openPlayer('MARTINS')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -1896,7 +2334,10 @@
                 </div>
 
 
-                <div class="player-card attacker captain">
+                <div
+                    class="player-card attacker captain"
+                    onclick="openPlayer('TEDDY')"
+                >
 
                     <div class="player-photo-box">
                         <img
@@ -2293,6 +2734,156 @@
 
 
 
+<!-- ==================================================
+     PERFIL DO JOGADOR
+================================================== -->
+
+<div
+    id="playerModal"
+    class="player-modal"
+    onclick="closePlayerOutside(event)"
+>
+
+    <div class="player-modal-content">
+
+        <button
+            class="player-modal-close"
+            onclick="closePlayer()"
+            aria-label="Fechar perfil"
+        >
+            ×
+        </button>
+
+
+        <!-- FOTO -->
+
+        <div class="player-modal-photo">
+
+            <img
+                id="modalPlayerImage"
+                class="modal-player-image"
+                src=""
+                alt=""
+            >
+
+            <div
+                id="modalPhotoPlaceholder"
+                class="modal-photo-placeholder"
+                style="display:none;"
+            >
+                FOTO
+            </div>
+
+        </div>
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="player-modal-info">
+
+            <div class="modal-eyebrow">
+                NEXTGEN UNITED · PLAYER PROFILE
+            </div>
+
+
+            <h2
+                id="modalPlayerName"
+                class="modal-player-name"
+            >
+                JOGADOR
+            </h2>
+
+
+            <div
+                id="modalPlayerPosition"
+                class="modal-player-position"
+            >
+                POSIÇÃO
+            </div>
+
+
+            <div
+                id="modalPlayerRole"
+                class="modal-player-role"
+                style="display:none;"
+            >
+                CARGO
+            </div>
+
+
+            <div
+                id="modalPlayerNumber"
+                class="modal-number"
+            >
+                00
+            </div>
+
+
+            <div class="modal-stats">
+
+
+                <div class="modal-stat">
+
+                    <strong id="modalGames">
+                        0
+                    </strong>
+
+                    <span>
+                        JOGOS
+                    </span>
+
+                </div>
+
+
+                <div class="modal-stat">
+
+                    <strong id="modalGoals">
+                        0
+                    </strong>
+
+                    <span>
+                        GOLOS
+                    </span>
+
+                </div>
+
+
+                <div class="modal-stat">
+
+                    <strong id="modalAssists">
+                        0
+                    </strong>
+
+                    <span>
+                        ASSISTÊNCIAS
+                    </span>
+
+                </div>
+
+
+                <div class="modal-stat">
+
+                    <strong id="modalYellow">
+                        0
+                    </strong>
+
+                    <span>
+                        AMARELOS
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
 <!-- =========================
      FOOTER
 ========================= -->
@@ -2324,9 +2915,12 @@
 
 <script>
 
-    function showPage(pageName) {
 
-        /* Esconde todas as páginas */
+    /* =========================
+       NAVEGAÇÃO
+    ========================= */
+
+    function showPage(pageName) {
 
         const pages = document.querySelectorAll(".page");
 
@@ -2335,18 +2929,16 @@
         });
 
 
-        /* Mostra apenas a página escolhida */
-
-        const selectedPage = document.getElementById(pageName);
+        const selectedPage =
+            document.getElementById(pageName);
 
         if (selectedPage) {
             selectedPage.classList.add("active");
         }
 
 
-        /* Atualiza o menu */
-
-        const buttons = document.querySelectorAll("nav button");
+        const buttons =
+            document.querySelectorAll("nav button");
 
         buttons.forEach(function(button) {
             button.classList.remove("active");
@@ -2361,14 +2953,378 @@
         }
 
 
-        /* Volta ao topo */
-
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
 
     }
+
+
+
+    /* =========================
+       DADOS DOS JOGADORES
+    ========================= */
+
+    const playersData = {
+
+        "MOSCA": {
+            number: "99",
+            position: "GR · GUARDA-REDES",
+            photo: "Mosca.jpg",
+            games: 4,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "NIGHTFACE": {
+            number: "1",
+            position: "GR · GUARDA-REDES",
+            photo: "nightface.jpg",
+            games: 4,
+            goals: 4,
+            assists: 0,
+            yellow: 0
+        },
+
+        "MJ_": {
+            number: "12",
+            position: "GR · GUARDA-REDES",
+            photo: "MJ.jpg",
+            games: 2,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "BANJAQUI": {
+            number: "2",
+            position: "DD · DEFESA",
+            photo: "",
+            games: 4,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "LOURO": {
+            number: "5",
+            position: "DC · DEFESA",
+            photo: "Louro.jpg",
+            games: 3,
+            goals: 0,
+            assists: 0,
+            yellow: 1
+        },
+
+        "TXUBAS": {
+            number: "23",
+            position: "DD · DEFESA",
+            photo: "",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "DIOGO": {
+            number: "4",
+            position: "DC · DEFESA",
+            photo: "diogo.jpg",
+            games: 2,
+            goals: 0,
+            assists: 0,
+            yellow: 1
+        },
+
+        "GB": {
+            number: "18",
+            position: "DC · DEFESA",
+            photo: "GB.jpg",
+            games: 2,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "SALES": {
+            number: "15",
+            position: "DC · DEFESA",
+            photo: "Sales.jpg",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "DUDA": {
+            number: "16",
+            position: "MC · MÉDIO",
+            photo: "duda.jpg",
+            games: 3,
+            goals: 0,
+            assists: 0,
+            yellow: 1
+        },
+
+        "RAFAEL": {
+            number: "20",
+            position: "MC · MÉDIO",
+            photo: "Rafa.jpg",
+            games: 4,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "WOLF": {
+            number: "45",
+            position: "MC · MÉDIO",
+            photo: "Wolf.jpg",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "KERMIT": {
+            number: "36",
+            position: "MC · MÉDIO",
+            photo: "Kermit.jpg",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "ROGERIO": {
+            number: "65",
+            position: "MD · MÉDIO",
+            photo: "Rogerio.jpg",
+            games: 3,
+            goals: 0,
+            assists: 0,
+            yellow: 0
+        },
+
+        "PEDRO": {
+            number: "69",
+            position: "ME · MÉDIO",
+            photo: "pedro.jpg",
+            games: 2,
+            goals: 1,
+            assists: 0,
+            yellow: 0
+        },
+
+        "DOLLY": {
+            number: "78",
+            position: "ME · MÉDIO",
+            photo: "Dolly.jpg",
+            games: 3,
+            goals: 1,
+            assists: 0,
+            yellow: 0
+        },
+
+        "MARTINS": {
+            number: "10",
+            position: "PL · AVANÇADO",
+            photo: "Martins.jpg",
+            games: 0,
+            goals: 0,
+            assists: 0,
+            yellow: 0,
+            role: "PRESIDENTE"
+        },
+
+        "TEDDY": {
+            number: "9",
+            position: "PL · AVANÇADO",
+            photo: "Teddy.jpg",
+            games: 4,
+            goals: 3,
+            assists: 1,
+            yellow: 2,
+            role: "CAPITÃO"
+        }
+
+    };
+
+
+
+    /* =========================
+       ABRIR PERFIL
+    ========================= */
+
+    function openPlayer(playerName) {
+
+        const player =
+            playersData[playerName];
+
+        if (!player) {
+            return;
+        }
+
+
+        const modal =
+            document.getElementById("playerModal");
+
+        const image =
+            document.getElementById("modalPlayerImage");
+
+        const placeholder =
+            document.getElementById("modalPhotoPlaceholder");
+
+
+        document.getElementById("modalPlayerName")
+            .textContent = playerName;
+
+
+        document.getElementById("modalPlayerPosition")
+            .textContent = player.position;
+
+
+        document.getElementById("modalPlayerNumber")
+            .textContent = player.number;
+
+
+        document.getElementById("modalGames")
+            .textContent = player.games;
+
+
+        document.getElementById("modalGoals")
+            .textContent = player.goals;
+
+
+        document.getElementById("modalAssists")
+            .textContent = player.assists;
+
+
+        document.getElementById("modalYellow")
+            .textContent = player.yellow;
+
+
+
+        /* CARGO */
+
+        const role =
+            document.getElementById("modalPlayerRole");
+
+        if (player.role) {
+
+            role.textContent = player.role;
+
+            role.style.display = "inline-block";
+
+            if (player.role === "CAPITÃO") {
+
+                role.style.color = "#ffd84d";
+                role.style.borderColor = "#d6a928";
+
+            } else {
+
+                role.style.color = "#fff";
+                role.style.borderColor = "#555";
+
+            }
+
+        } else {
+
+            role.style.display = "none";
+
+        }
+
+
+
+        /* FOTO */
+
+        if (player.photo) {
+
+            image.src = player.photo;
+
+            image.alt = playerName;
+
+            image.style.display = "block";
+
+            placeholder.style.display = "none";
+
+        } else {
+
+            image.src = "";
+
+            image.alt = "";
+
+            image.style.display = "none";
+
+            placeholder.style.display = "flex";
+
+        }
+
+
+
+        /* ABRIR */
+
+        modal.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+
+    /* =========================
+       FECHAR PERFIL
+    ========================= */
+
+    function closePlayer() {
+
+        const modal =
+            document.getElementById("playerModal");
+
+        modal.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+
+    /* =========================
+       FECHAR AO CLICAR FORA
+    ========================= */
+
+    function closePlayerOutside(event) {
+
+        if (
+            event.target ===
+            document.getElementById("playerModal")
+        ) {
+
+            closePlayer();
+
+        }
+
+    }
+
+
+
+    /* =========================
+       TECLA ESC
+    ========================= */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+                closePlayer();
+            }
+
+        }
+    );
+
 
 </script>
 
