@@ -69,18 +69,17 @@
 
             cursor: pointer;
 
-            display: flex;
-            align-items: center;
-
             background: none;
             border: none;
-            padding: 0;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        /* LOGO DO HEADER */
         .logo img {
-            width: 52px;
-            height: 52px;
+            width: 42px;
+            height: 42px;
 
             object-fit: contain;
 
@@ -305,31 +304,17 @@
             border-radius: 50%;
         }
 
-        .decoration-text {
-            position: relative;
-
-            color: #1c1c1c;
-
-            font-size: 110px;
-
-            font-weight: 900;
-
-            letter-spacing: -8px;
-        }
-
-
-        /* =========================
-           LOGO NA DECORAÇÃO DA HOME
-        ========================= */
-
         .decoration-logo {
             position: relative;
-            z-index: 2;
 
-            width: 170px;
-            height: 170px;
+            width: 190px;
+            height: 190px;
 
             object-fit: contain;
+
+            z-index: 2;
+
+            filter: drop-shadow(0 0 25px rgba(255,106,0,0.15));
         }
 
 
@@ -893,18 +878,6 @@
             text-align: center;
         }
 
-        /* LOGO DO JOGO */
-        .team-logo {
-            width: 105px;
-            height: 105px;
-
-            object-fit: contain;
-
-            display: block;
-
-            margin: 0 auto 18px;
-        }
-
         .team-side span {
             color: #666;
 
@@ -929,6 +902,19 @@
             font-size: 31px;
 
             font-weight: 900;
+        }
+
+        .team-logo {
+            width: 90px;
+            height: 90px;
+
+            object-fit: contain;
+
+            display: block;
+
+            margin: 0 auto 18px;
+
+            filter: drop-shadow(0 0 20px rgba(255,106,0,0.18));
         }
 
         .versus {
@@ -1028,24 +1014,26 @@
             border-top: 1px solid #222;
         }
 
-        /* LOGO DO FOOTER */
-        .footer-logo img {
-            width: 70px;
-            height: 70px;
-
-            object-fit: contain;
-
-            display: block;
-
-            margin: 0 auto;
-        }
-
         .footer-logo {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
             font-size: 19px;
 
             font-weight: 900;
 
             letter-spacing: 2px;
+        }
+
+        .footer-logo img {
+            width: 38px;
+            height: 38px;
+
+            object-fit: contain;
         }
 
         .footer-logo span {
@@ -1200,8 +1188,8 @@
             }
 
             .logo img {
-                width: 46px;
-                height: 46px;
+                width: 36px;
+                height: 36px;
             }
 
             .home-hero h1 {
@@ -1233,11 +1221,15 @@
 
 <header class="header">
 
-    <button class="logo" onclick="showPage('inicio')" aria-label="NextGen United">
+    <button class="logo" onclick="showPage('inicio')">
+
         <img
-            src="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png"
+            src="logo.png.png"
             alt="NextGen United"
         >
+
+        NEXTGEN <span>UNITED</span>
+
     </button>
 
 
@@ -1336,8 +1328,8 @@
 
             <img
                 class="decoration-logo"
-                src="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png"
-                alt="NextGen United"
+                src="logo.png.png"
+                alt="Logo NextGen United"
             >
 
         </div>
@@ -1967,11 +1959,10 @@
                     CASA
                 </span>
 
-                <!-- LOGO NEXTGEN UNITED -->
                 <img
                     class="team-logo"
-                    src="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png"
-                    alt="NextGen United"
+                    src="logo.png.png"
+                    alt="Logo NextGen United"
                 >
 
                 <h2>
@@ -2057,9 +2048,11 @@
     <div class="footer-logo">
 
         <img
-            src="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png"
-            alt="NextGen United"
+            src="logo.png.png"
+            alt="Logo NextGen United"
         >
+
+        NEXTGEN <span>UNITED</span>
 
     </div>
 
