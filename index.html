@@ -3229,7 +3229,6 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
             <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;">
                 <button class="attendance-btn" type="button" onclick="saveAttendanceData()">💾 GUARDAR PRESENÇAS</button><span id="attendanceSaveMessage" style="display:none;color:#20c463;font-weight:800;font-size:12px;">✓ Presenças guardadas</span>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;">
-                <button class="attendance-btn" type="button" onclick="saveAttendanceData()">💾 GUARDAR PRESENÇAS</button><span id="attendanceSaveMessage" style="display:none;color:#20c463;font-weight:800;font-size:12px;">✓ Presenças guardadas</span>
                 <button class="attendance-btn" type="button" onclick="clearAttendanceWeek()">LIMPAR SEMANA</button>
             </div>
             </div>
@@ -3250,7 +3249,7 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
             </table>
         </div>
 
-        <p class="attendance-note">Clica numa célula para alternar: <strong>sem registo → presença → atraso → falta → falta sem aviso → sem registo</strong>. Os registos ficam guardados online. Só o Teddy e o Martins podem editar.</p>
+        <p class="attendance-note">Clica numa célula para alternar: <strong>sem registo → presença → atraso → falta → falta sem aviso → sem registo</strong>. Os registos ficam guardados online no Firebase. Só o Teddy pode editar.</p>
     </section>
 </main>
 
@@ -4003,27 +4002,16 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
 </div>
 
 <script>
-/* ==================================================
-   PRESENÇAS + GOOGLE LOGIN + FIRESTORE
-   CONFIGURAÇÃO NECESSÁRIA:
-   1) Criar um projeto Firebase.
-   2) Ativar Authentication > Google.
-   3) Criar Firestore Database.
-   4) Colar aqui os dados da Web App do Firebase.
-   5) Substituir os dois emails abaixo.
-================================================== */
+/* PRESENÇAS + GOOGLE LOGIN + FIRESTORE */
 const FIREBASE_CONFIG = {
-  apiKey: "COLOCA_AQUI_API_KEY",
-  authDomain: "COLOCA_AQUI.firebaseapp.com",
-  projectId: "COLOCA_AQUI",
-  storageBucket: "COLOCA_AQUI.firebasestorage.app",
-  messagingSenderId: "COLOCA_AQUI",
-  appId: "COLOCA_AQUI"
+  apiKey: "AIzaSyCod7SzeI25LeY_S2f5W4YBKcI7pzJaJNY",
+  authDomain: "nextgen-united.firebaseapp.com",
+  projectId: "nextgen-united",
+  storageBucket: "nextgen-united.firebasestorage.app",
+  messagingSenderId: "412644078081",
+  appId: "1:412644078081:web:1e632537d524badef78600"
 };
-const ADMIN_EMAILS = {
-  teddy: "EMAIL_DO_TEDDY",
-  martins: "EMAIL_DO_MARTINS"
-};
+const ADMIN_EMAIL = "miguelrrangelo12@gmail.com";
 
 (function(){
   const statusOrder=['empty','present','late','absent','unexcused'];
@@ -4032,7 +4020,7 @@ const ADMIN_EMAILS = {
   let attendanceWeekStart=startOfSunday(new Date());
   let attendanceData={};
   let currentUser=null;
-  let canEdit=sessionStorage.getItem('attendanceAdmin')==='1';
+  let canEdit=false;
   let cloudReady=false;
 
   function startOfSunday(date){const d=new Date(date.getFullYear(),date.getMonth(),date.getDate());d.setDate(d.getDate()-d.getDay());return d;}
@@ -4044,14 +4032,13 @@ const ADMIN_EMAILS = {
   function playerPosition(name){if(typeof playersData!=='undefined'&&playersData[name])return playersData[name].position;return '';}
   function currentStatus(player,date){const key=dateKey(date);return(attendanceData[key]&&attendanceData[key][player])||'empty';}
   function setAuthUI(){
-    if(sessionStorage.getItem('attendanceAdmin')==='1'){ currentUser={email:'miguelrrangelo12@gmail.com',displayName:'Teddy'}; canEdit=true; }
     let box=document.getElementById('attendanceAuthBox');
     if(!box){
       box=document.createElement('div');box.id='attendanceAuthBox';box.style.cssText='margin:0 0 18px;padding:14px 16px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;';
       const wrap=document.querySelector('#presencas .attendance-wrap'); if(wrap) wrap.insertBefore(box,wrap.firstElementChild);
     }
-    if(!currentUser){box.innerHTML='<div><strong>🔒 Presenças protegidas</strong><br><span style="opacity:.7">Só o Teddy e o Martins podem alterar os registos.</span></div><button class="attendance-btn" id="googleLoginBtn" type="button">ENTRAR COM GOOGLE</button>';document.getElementById('googleLoginBtn').onclick=googleLogin;}
-    else {const role=currentUser.email?.toLowerCase()===ADMIN_EMAILS.teddy.toLowerCase()?'ADMIN':currentUser.email?.toLowerCase()===ADMIN_EMAILS.martins.toLowerCase()?'CO-ADMIN':'CONSULTA';box.innerHTML='<div><strong>👤 '+(currentUser.displayName||currentUser.email)+'</strong><br><span style="opacity:.7">Modo '+role+(canEdit?' · pode editar':' · apenas consulta')+'</span></div><button class="attendance-btn" type="button" id="googleLogoutBtn">SAIR</button>';document.getElementById('googleLogoutBtn').onclick=googleLogout;}
+    if(!currentUser){box.innerHTML='<div><strong>🔒 Presenças protegidas</strong><br><span style="opacity:.7">Só o Teddy pode alterar os registos.</span></div><button class="attendance-btn" id="googleLoginBtn" type="button">ENTRAR COM GOOGLE</button>';document.getElementById('googleLoginBtn').onclick=googleLogin;}
+    else {const role=currentUser.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase()?'ADMIN':'CONSULTA';box.innerHTML='<div><strong>👤 '+(currentUser.displayName||currentUser.email)+'</strong><br><span style="opacity:.7">Modo '+role+(canEdit?' · pode editar':' · apenas consulta')+'</span></div><button class="attendance-btn" type="button" id="googleLogoutBtn">SAIR</button>';document.getElementById('googleLogoutBtn').onclick=googleLogout;}
   }
   function renderAttendance(){
     const label=document.getElementById('attendanceWeekLabel'),head=document.getElementById('attendanceHead'),body=document.getElementById('attendanceBody');if(!label||!head||!body)return;
@@ -4061,12 +4048,16 @@ const ADMIN_EMAILS = {
   }
   async function googleLogin(){if(!cloudReady){alert('O login ainda não está configurado. É preciso ligar este site ao projeto Firebase.');return;}try{const provider=new firebase.auth.GoogleAuthProvider();await firebase.auth().signInWithPopup(provider);}catch(e){alert('Não foi possível entrar com Google: '+e.message);}}
   async function googleLogout(){if(window.firebase)await firebase.auth().signOut();}
-  const LOCAL_ATTENDANCE_KEY='trainingAttendanceData_TEDDY_V2';
 
   async function loadWeekFromCloud(){
     try{
-      const raw=localStorage.getItem(LOCAL_ATTENDANCE_KEY);
-      attendanceData=raw?JSON.parse(raw)||{}:{};
+      if(cloudReady && window.firebase && firebase.auth().currentUser){
+        const weekId=dateKey(attendanceWeekStart);
+        const snap=await firebase.firestore().collection('presencas').doc(weekId).get();
+        attendanceData=snap.exists ? (snap.data().data || {}) : {};
+      } else {
+        attendanceData={};
+      }
     }catch(e){
       attendanceData={};
       console.error('Erro a carregar presenças:',e);
@@ -4077,8 +4068,10 @@ const ADMIN_EMAILS = {
   async function saveWeekToCloud(){
     if(!canEdit)return;
     try{
-      localStorage.setItem(LOCAL_ATTENDANCE_KEY,JSON.stringify(attendanceData));
-      localStorage.setItem('trainingAttendanceData',JSON.stringify(attendanceData));
+      if(cloudReady && window.firebase && firebase.auth().currentUser){
+        const weekId=dateKey(attendanceWeekStart);
+        await firebase.firestore().collection('presencas').doc(weekId).set({data:attendanceData,updatedAt:firebase.firestore.FieldValue.serverTimestamp(),updatedBy:firebase.auth().currentUser.email},{merge:true});
+      }
     }catch(e){
       console.error('Erro a guardar presenças:',e);
       throw e;
@@ -4087,12 +4080,11 @@ const ADMIN_EMAILS = {
 
   window.saveAttendanceData=async function(){
     if(!canEdit){
-      alert('Entra primeiro no MODO ADMIN para guardar as presenças.');
+      alert('Entra com a conta Google do Teddy para guardar as presenças.');
       return;
     }
     try{
-      localStorage.setItem(LOCAL_ATTENDANCE_KEY,JSON.stringify(attendanceData));
-      localStorage.setItem('trainingAttendanceData',JSON.stringify(attendanceData));
+      await saveWeekToCloud();
       const msg=document.getElementById('attendanceSaveMessage');
       if(msg){
         msg.textContent='✓ Presenças guardadas com sucesso';
@@ -4106,25 +4098,23 @@ const ADMIN_EMAILS = {
     }
   };
 
-  async function cycleStatus(player,date){if(!canEdit)return;const key=dateKey(date);if(!attendanceData[key])attendanceData[key]={};const current=currentStatus(player,date);const next=statusOrder[(statusOrder.indexOf(current)+1)%statusOrder.length];if(next==='empty')delete attendanceData[key][player];else attendanceData[key][player]=next;renderAttendance();try{localStorage.setItem(LOCAL_ATTENDANCE_KEY,JSON.stringify(attendanceData));localStorage.setItem('trainingAttendanceData',JSON.stringify(attendanceData));}catch(e){console.error(e);alert('Não foi possível guardar esta alteração.');}}
+  async function cycleStatus(player,date){if(!canEdit)return;const key=dateKey(date);if(!attendanceData[key])attendanceData[key]={};const current=currentStatus(player,date);const next=statusOrder[(statusOrder.indexOf(current)+1)%statusOrder.length];if(next==='empty')delete attendanceData[key][player];else attendanceData[key][player]=next;renderAttendance();try{await saveWeekToCloud();}catch(e){console.error(e);alert('Não foi possível guardar esta alteração: '+e.message);}}
   window.cycleAttendanceCell=function(player,timestamp){cycleStatus(player,new Date(timestamp));};
   window.changeAttendanceWeek=function(days){attendanceWeekStart.setDate(attendanceWeekStart.getDate()+days);loadWeekFromCloud();};
   window.goAttendanceToday=function(){attendanceWeekStart=startOfSunday(new Date());loadWeekFromCloud();};
   window.clearAttendanceWeek=async function(){if(!canEdit)return;if(!confirm('Queres limpar todos os registos desta semana?'))return;attendanceData={};renderAttendance();try{await saveWeekToCloud();}catch(e){console.error(e);}};
-  window.renderAttendance=renderAttendance;
-  window.addEventListener('adminModeChanged', function(e){ canEdit=!!e.detail; if(canEdit){currentUser={email:'miguelrrangelo12@gmail.com',displayName:'Teddy'};} else {currentUser=null;} renderAttendance(); });
+  window.renderAttendance=renderAttendance; if(canEdit){currentUser={email:'miguelrrangelo12@gmail.com',displayName:'Teddy'};} else {currentUser=null;} renderAttendance(); });
   window.addEventListener('DOMContentLoaded',function(){
     setTimeout(function(){loadWeekFromCloud();},100);
   });
 
 
   function loadFirebaseScripts(){
-    if(FIREBASE_CONFIG.apiKey.startsWith('COLOCA_AQUI')){setAuthUI();renderAttendance();return;}
-    const a=document.createElement('script');a.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js';a.onload=function(){
+        const a=document.createElement('script');a.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js';a.onload=function(){
       const b=document.createElement('script');b.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js';b.onload=function(){
         const c=document.createElement('script');c.src='https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js';c.onload=function(){
           firebase.initializeApp(FIREBASE_CONFIG);cloudReady=true;
-          firebase.auth().onAuthStateChanged(async function(user){currentUser=user;const email=(user?.email||'').toLowerCase();canEdit=!!user&&(email===ADMIN_EMAILS.teddy.toLowerCase()||email===ADMIN_EMAILS.martins.toLowerCase());await loadWeekFromCloud();});
+          firebase.auth().onAuthStateChanged(async function(user){currentUser=user;const email=(user?.email||'').toLowerCase();canEdit=!!user&&(email===ADMIN_EMAIL.toLowerCase());await loadWeekFromCloud();});
         };document.head.appendChild(c);
       };document.head.appendChild(b);
     };document.head.appendChild(a);
@@ -4132,108 +4122,9 @@ const ADMIN_EMAILS = {
   loadFirebaseScripts();
 })();
 </script>
-<!-- FIRESTORE SECURITY RULES (colar no Firebase Console > Firestore > Rules)
 
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /trainingAttendance/{week} {
-      allow read: if request.auth != null;
-      allow create, update, delete: if request.auth != null &&
-        (request.auth.token.email == "EMAIL_DO_TEDDY" ||
-         request.auth.token.email == "EMAIL_DO_MARTINS");
-    }
-  }
-}
--->
 
-<button id="adminLoginBtn" type="button" onclick="openAdminPin()">🔐 ADMIN</button>
-<div id="adminBadge">
-  👑 Modo Admin
-  <button type="button" onclick="logoutAdmin()">Sair</button>
-</div>
 
-<div id="adminPinModal" aria-hidden="true">
-  <div id="adminPinBox">
-    <h3>🔐 Acesso de administrador</h3>
-    <div>Introduz o PIN para poderes alterar as presenças.</div>
-    <div style="margin-top:14px">
-      <input id="adminPinInput" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••">
-    </div>
-    <div id="adminPinError"></div>
-    <div id="adminPinActions">
-      <button type="button" onclick="closeAdminPin()">Cancelar</button>
-      <button type="button" onclick="checkAdminPin()">Entrar</button>
-    </div>
-  </div>
-</div>
-
-<script id="admin-pin-script">
-(function () {
-  const ADMIN_PIN = "2809";
-  let adminMode = sessionStorage.getItem("attendanceAdmin") === "1";
-
-  function syncAdminUI() {
-    document.body.classList.toggle("admin-locked", !adminMode);
-    const login = document.getElementById("adminLoginBtn");
-    const badge = document.getElementById("adminBadge");
-    if (login) login.style.display = adminMode ? "none" : "block";
-    if (badge) badge.style.display = adminMode ? "flex" : "none";
-  }
-
-  window.openAdminPin = function () {
-    const modal = document.getElementById("adminPinModal");
-    const input = document.getElementById("adminPinInput");
-    const err = document.getElementById("adminPinError");
-    if (!modal) return;
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden", "false");
-    if (err) err.textContent = "";
-    if (input) { input.value = ""; setTimeout(() => input.focus(), 50); }
-  };
-
-  window.closeAdminPin = function () {
-    const modal = document.getElementById("adminPinModal");
-    if (modal) {
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-    }
-  };
-
-  window.checkAdminPin = function () {
-    const input = document.getElementById("adminPinInput");
-    const err = document.getElementById("adminPinError");
-    if (input && input.value === ADMIN_PIN) {
-      adminMode = true;
-      sessionStorage.setItem("attendanceAdmin", "1");
-      syncAdminUI();
-      window.dispatchEvent(new CustomEvent('adminModeChanged', {detail:true}));
-      closeAdminPin();
-    } else if (err) {
-      err.textContent = "PIN incorreto.";
-      if (input) { input.value = ""; input.focus(); }
-    }
-  };
-
-  window.logoutAdmin = function () {
-    adminMode = false;
-    sessionStorage.removeItem("attendanceAdmin");
-    syncAdminUI();
-    window.dispatchEvent(new CustomEvent('adminModeChanged', {detail:false}));
-  };
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" && document.getElementById("adminPinModal")?.classList.contains("open")) {
-      window.checkAdminPin();
-    }
-    if (e.key === "Escape") window.closeAdminPin();
-  });
-
-  document.addEventListener("DOMContentLoaded", function(){ syncAdminUI(); window.dispatchEvent(new CustomEvent('adminModeChanged', {detail:adminMode})); });
-  syncAdminUI();
-  if (document.readyState !== 'loading') window.dispatchEvent(new CustomEvent('adminModeChanged', {detail:adminMode}));
-})();
-</script>
 
 
 
