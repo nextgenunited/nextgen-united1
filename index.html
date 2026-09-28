@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>NEXTGEN UNITED</title>
 
-    <!-- LOGO / FAVICON -->
     <link rel="icon" type="image/png" href="logo.png.png">
     <link rel="apple-touch-icon" href="logo.png.png">
 
@@ -28,7 +26,7 @@
         }
 
         body {
-            background: #070707;
+            background: #050505;
             color: #fff;
             font-family: Arial, Helvetica, sans-serif;
             min-height: 100vh;
@@ -54,7 +52,6 @@
             padding: 0 7%;
 
             background: rgba(5,5,5,0.97);
-
             border-bottom: 1px solid #242424;
         }
 
@@ -64,7 +61,6 @@
 
             font-size: 21px;
             font-weight: 900;
-
             letter-spacing: 2px;
 
             cursor: pointer;
@@ -80,10 +76,7 @@
         .logo img {
             width: 42px;
             height: 42px;
-
             object-fit: contain;
-
-            display: block;
         }
 
         .logo span {
@@ -106,7 +99,6 @@
 
             font-size: 10px;
             font-weight: 900;
-
             letter-spacing: 1.7px;
 
             cursor: pointer;
@@ -126,7 +118,6 @@
             content: "";
 
             position: absolute;
-
             left: 0;
             right: 0;
             bottom: -9px;
@@ -184,7 +175,6 @@
 
             font-size: 10px;
             font-weight: 900;
-
             letter-spacing: 4px;
 
             margin-bottom: 22px;
@@ -192,11 +182,9 @@
 
         .home-hero h1 {
             font-size: clamp(65px, 10vw, 145px);
-
             line-height: 0.82;
 
             font-weight: 900;
-
             letter-spacing: -6px;
         }
 
@@ -210,16 +198,13 @@
             color: #777;
 
             font-size: 11px;
-
             font-weight: 900;
-
             letter-spacing: 4px;
         }
 
         .home-buttons {
             display: flex;
             gap: 12px;
-
             margin-top: 38px;
         }
 
@@ -233,21 +218,18 @@
 
             padding: 0 27px;
 
-            border: none;
-
             font-size: 10px;
             font-weight: 900;
-
             letter-spacing: 1.5px;
 
             cursor: pointer;
-
             transition: 0.2s ease;
         }
 
         .main-button {
             background: #ff6a00;
             color: #000;
+            border: none;
         }
 
         .main-button:hover {
@@ -256,9 +238,7 @@
 
         .second-button {
             background: transparent;
-
             border: 1px solid #333;
-
             color: #aaa;
         }
 
@@ -268,7 +248,9 @@
         }
 
 
-        /* DECORAÇÃO */
+        /* =========================
+           HOME DECORATION
+        ========================= */
 
         .home-decoration {
             position: relative;
@@ -288,7 +270,6 @@
             height: 330px;
 
             border: 1px solid #333;
-
             border-radius: 50%;
         }
 
@@ -296,11 +277,9 @@
             content: "";
 
             position: absolute;
-
             inset: 30px;
 
             border: 1px solid #ff6a00;
-
             border-radius: 50%;
         }
 
@@ -311,26 +290,27 @@
             height: 190px;
 
             object-fit: contain;
-
             z-index: 2;
 
-            filter: drop-shadow(0 0 25px rgba(255,106,0,0.15));
+            filter: drop-shadow(
+                0 0 25px rgba(255,106,0,0.15)
+            );
         }
 
 
-        /* HOME RECORD */
+        /* =========================
+           HOME RECORD
+        ========================= */
 
         .home-record {
             display: grid;
 
             grid-template-columns: 220px 1fr;
-
             gap: 40px;
 
             padding: 50px 8%;
 
             border-top: 1px solid #222;
-
             background: #050505;
         }
 
@@ -339,7 +319,6 @@
 
             font-size: 9px;
             font-weight: 900;
-
             letter-spacing: 2px;
         }
 
@@ -347,13 +326,11 @@
             margin-top: 7px;
 
             font-size: 25px;
-
             font-weight: 900;
         }
 
         .home-stats {
             display: grid;
-
             grid-template-columns: repeat(4,1fr);
         }
 
@@ -362,7 +339,6 @@
 
             display: flex;
             flex-direction: column;
-
             align-items: center;
             justify-content: center;
 
@@ -373,7 +349,6 @@
             color: #ff6a00;
 
             font-size: 38px;
-
             font-weight: 900;
         }
 
@@ -383,9 +358,7 @@
             color: #666;
 
             font-size: 9px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
         }
 
@@ -411,9 +384,7 @@
             color: #ff6a00;
 
             font-size: 10px;
-
             font-weight: 900;
-
             letter-spacing: 3px;
 
             margin-bottom: 12px;
@@ -425,7 +396,6 @@
             line-height: 0.9;
 
             font-weight: 900;
-
             letter-spacing: -4px;
         }
 
@@ -437,9 +407,7 @@
             color: #555;
 
             font-size: 9px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
         }
 
@@ -450,11 +418,9 @@
 
         .section {
             width: 100%;
-
             max-width: 1300px;
 
             margin: 0 auto;
-
             padding: 90px 7%;
         }
 
@@ -469,25 +435,21 @@
 
         .position-title {
             display: flex;
-
             align-items: center;
 
             gap: 13px;
-
             margin-bottom: 20px;
 
             font-size: 11px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
 
             color: #777;
         }
 
         .position-title span {
-            color: #ff6a00;
             font-size: 10px;
+            color: #ff6a00;
         }
 
         .goalkeeper-title span {
@@ -507,7 +469,9 @@
         }
 
 
-        /* PLAYERS */
+        /* =========================
+           PLAYER CARDS
+        ========================= */
 
         .players {
             display: grid;
@@ -524,17 +488,16 @@
             min-height: 105px;
 
             display: flex;
-
             align-items: center;
 
             background: #0d0d0d;
 
             border: 1px solid #202020;
+            border-left-width: 4px;
 
             overflow: hidden;
 
             transition: 0.2s ease;
-
             cursor: pointer;
         }
 
@@ -542,12 +505,8 @@
             transform: translateY(-3px);
 
             background: #131313;
-
             border-color: #3a3a3a;
         }
-
-
-        /* FOTO DOS JOGADORES */
 
         .player-photo-box {
             width: 105px;
@@ -560,7 +519,6 @@
             background: #111;
 
             border-right: 1px solid #222;
-
             overflow: hidden;
         }
 
@@ -569,28 +527,22 @@
             height: 100%;
 
             object-fit: cover;
-
             display: block;
         }
 
         .player-photo-placeholder {
             position: absolute;
-
             inset: 0;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             background: #111;
-
             color: #333;
 
             font-size: 9px;
-
             font-weight: 900;
-
             letter-spacing: 1px;
         }
 
@@ -600,12 +552,10 @@
             flex-shrink: 0;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             font-size: 31px;
-
             font-weight: 900;
 
             color: #333;
@@ -613,9 +563,7 @@
 
         .player-info h3 {
             font-size: 14px;
-
             font-weight: 900;
-
             letter-spacing: 0.8px;
         }
 
@@ -625,17 +573,15 @@
             color: #666;
 
             font-size: 9px;
-
             font-weight: 900;
-
             letter-spacing: 1.5px;
         }
 
 
-        /* CORES POSIÇÕES */
+        /* CORES */
 
         .goalkeeper {
-            border-left: 4px solid #8b5cf6;
+            border-left-color: #8b5cf6;
         }
 
         .goalkeeper .player-number {
@@ -643,7 +589,7 @@
         }
 
         .defender {
-            border-left: 4px solid #ff6a00;
+            border-left-color: #ff6a00;
         }
 
         .defender .player-number {
@@ -651,7 +597,7 @@
         }
 
         .midfielder {
-            border-left: 4px solid #1683ff;
+            border-left-color: #1683ff;
         }
 
         .midfielder .player-number {
@@ -659,7 +605,7 @@
         }
 
         .attacker {
-            border-left: 4px solid #e53935;
+            border-left-color: #e53935;
         }
 
         .attacker .player-number {
@@ -667,16 +613,15 @@
         }
 
 
-        /* PRESIDENTE */
+        /* MARTINS */
 
         .president {
-            border-left-color: #fff;
-
-            background: #050505;
+            border-left-color: #333 !important;
+            background: #030303;
         }
 
         .president .player-number {
-            color: #fff;
+            color: #777;
         }
 
         .president .player-info h3 {
@@ -684,12 +629,11 @@
         }
 
 
-        /* CAPITÃO */
+        /* TEDDY */
 
         .captain {
-            border-left-color: #d6a928;
-
-            background: #121006;
+            border-left-color: #d6a928 !important;
+            background: #151208;
         }
 
         .captain .player-number {
@@ -700,7 +644,6 @@
             color: #ffd84d;
         }
 
-
         .role {
             position: absolute;
 
@@ -708,9 +651,7 @@
             right: 14px;
 
             font-size: 7px;
-
             font-weight: 900;
-
             letter-spacing: 1px;
         }
 
@@ -724,12 +665,11 @@
 
 
         /* =========================
-           PERFIL DO JOGADOR
+           MODAL PLAYER
         ========================= */
 
         .player-modal {
             position: fixed;
-
             inset: 0;
 
             z-index: 5000;
@@ -755,11 +695,9 @@
 
             width: 100%;
             max-width: 1000px;
-
             min-height: 560px;
 
             display: grid;
-
             grid-template-columns: 1fr 1fr;
 
             background:
@@ -790,7 +728,6 @@
             height: 42px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -801,7 +738,6 @@
             color: #aaa;
 
             font-size: 18px;
-
             font-weight: 900;
 
             cursor: pointer;
@@ -811,9 +747,7 @@
 
         .player-modal-close:hover {
             background: #ff6a00;
-
             border-color: #ff6a00;
-
             color: #000;
         }
 
@@ -823,7 +757,6 @@
             min-height: 560px;
 
             display: flex;
-
             align-items: flex-end;
             justify-content: center;
 
@@ -848,7 +781,6 @@
             height: 430px;
 
             border: 1px solid #333;
-
             border-radius: 50%;
 
             left: 50%;
@@ -866,7 +798,6 @@
             height: 330px;
 
             border: 1px solid #ff6a00;
-
             border-radius: 50%;
 
             left: 50%;
@@ -886,33 +817,29 @@
             height: 88%;
 
             object-fit: contain;
-
             object-position: center bottom;
 
-            filter: drop-shadow(
-                0 20px 30px rgba(0,0,0,0.7)
-            );
+            filter:
+                drop-shadow(
+                    0 20px 30px rgba(0,0,0,0.7)
+                );
         }
 
         .modal-photo-placeholder {
             position: relative;
-
             z-index: 2;
 
             width: 70%;
             height: 70%;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             color: #333;
 
             font-size: 35px;
-
             font-weight: 900;
-
             letter-spacing: 5px;
         }
 
@@ -920,9 +847,7 @@
             padding: 65px 55px;
 
             display: flex;
-
             flex-direction: column;
-
             justify-content: center;
         }
 
@@ -930,9 +855,7 @@
             color: #ff6a00;
 
             font-size: 9px;
-
             font-weight: 900;
-
             letter-spacing: 3px;
 
             margin-bottom: 15px;
@@ -944,7 +867,6 @@
             line-height: 0.9;
 
             font-weight: 900;
-
             letter-spacing: -3px;
         }
 
@@ -954,9 +876,7 @@
             color: #777;
 
             font-size: 11px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
         }
 
@@ -966,7 +886,6 @@
             width: fit-content;
 
             margin-top: 14px;
-
             padding: 8px 12px;
 
             background: #151515;
@@ -976,9 +895,7 @@
             color: #ff6a00;
 
             font-size: 8px;
-
             font-weight: 900;
-
             letter-spacing: 1.5px;
         }
 
@@ -988,7 +905,6 @@
             color: #333;
 
             font-size: 80px;
-
             line-height: 0.8;
 
             font-weight: 900;
@@ -996,7 +912,6 @@
 
         .modal-stats {
             display: grid;
-
             grid-template-columns: repeat(2,1fr);
 
             gap: 10px;
@@ -1008,9 +923,7 @@
             min-height: 90px;
 
             display: flex;
-
             flex-direction: column;
-
             justify-content: center;
 
             padding: 15px 18px;
@@ -1018,7 +931,6 @@
             background: #101010;
 
             border: 1px solid #242424;
-
             border-left: 3px solid #ff6a00;
         }
 
@@ -1026,7 +938,6 @@
             color: #fff;
 
             font-size: 30px;
-
             font-weight: 900;
         }
 
@@ -1036,9 +947,7 @@
             color: #555;
 
             font-size: 8px;
-
             font-weight: 900;
-
             letter-spacing: 1.5px;
         }
 
@@ -1054,10 +963,9 @@
         .stats-table {
             width: 100%;
 
-            background: #0b0b0b;
+            background: #080808;
 
             border: 1px solid #252525;
-
             border-radius: 5px;
 
             overflow: hidden;
@@ -1065,6 +973,9 @@
             box-shadow:
                 0 20px 60px rgba(0,0,0,0.35);
         }
+
+
+        /* HEADER DA TABELA */
 
         .stats-header {
             display: grid;
@@ -1090,11 +1001,56 @@
             color: #ff6a00;
 
             font-size: 9px;
-
             font-weight: 900;
-
             letter-spacing: 1.6px;
         }
+
+
+        /* BOTÕES CLICÁVEIS */
+
+        .stats-sort {
+            width: 100%;
+
+            border: none;
+            background: transparent;
+
+            color: #ff6a00;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 1.6px;
+
+            text-align: left;
+
+            padding: 18px 0;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .stats-sort:hover {
+            color: #fff;
+        }
+
+        .stats-sort.active {
+            color: #fff;
+        }
+
+        .sort-arrow {
+            display: inline-block;
+
+            margin-left: 5px;
+
+            color: #ff6a00;
+
+            font-size: 8px;
+        }
+
+
+        /* LINHAS */
 
         .stats-row {
             display: grid;
@@ -1130,71 +1086,120 @@
 
         .stats-row:hover {
             background: #151515;
-
-            box-shadow:
-                inset 4px 0 0 #ff6a00;
         }
 
         .stats-row strong {
             color: #fff;
 
             font-size: 13px;
-
             font-weight: 900;
-
             letter-spacing: 0.6px;
         }
 
         .stats-row span:nth-child(2) {
-            color: #666;
-
             font-size: 9px;
-
             font-weight: 900;
         }
 
         .stats-row span:nth-child(n+3) {
             color: #ddd;
-
             font-weight: 700;
         }
 
-        .stats-row span:nth-child(4) {
+
+        /* =========================
+           CORES DA TABELA
+        ========================= */
+
+        /* GR */
+
+        .goalkeeper-row {
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .goalkeeper-row strong {
+            color: #b28cff;
+        }
+
+        .goalkeeper-row span:nth-child(2) {
+            color: #8b5cf6;
+        }
+
+
+        /* DEFESAS */
+
+        .defender-row {
+            border-left: 4px solid #ff6a00;
+        }
+
+        .defender-row strong {
+            color: #ff944d;
+        }
+
+        .defender-row span:nth-child(2) {
             color: #ff6a00;
-
-            font-weight: 900;
-        }
-
-        .stats-row span:nth-child(6) {
-            color: #d6a900;
-
-            font-weight: 900;
         }
 
 
-        /* PRESIDENTE NA TABELA */
+        /* MÉDIOS */
 
-        .stats-row.president-row {
-            background: #080808;
-
-            border-left: 4px solid #555;
+        .midfielder-row {
+            border-left: 4px solid #1683ff;
         }
 
-        .stats-row.president-row strong {
+        .midfielder-row strong {
+            color: #5aaeff;
+        }
+
+        .midfielder-row span:nth-child(2) {
+            color: #1683ff;
+        }
+
+
+        /* MARTINS */
+
+        .martins-row {
+            background: #020202;
+
+            border-left: 4px solid #333;
+        }
+
+        .martins-row strong {
             color: #fff;
         }
 
+        .martins-row span:nth-child(2) {
+            color: #777;
+        }
 
-        /* CAPITÃO NA TABELA */
 
-        .stats-row.captain-row {
+        /* TEDDY */
+
+        .teddy-row {
             background: #151208;
 
             border-left: 4px solid #d6a928;
         }
 
-        .stats-row.captain-row strong {
+        .teddy-row strong {
             color: #ffd84d;
+        }
+
+        .teddy-row span:nth-child(2) {
+            color: #d6a928;
+        }
+
+
+        /* VALORES */
+
+        .goals-value {
+            color: #ff6a00 !important;
+            font-weight: 900 !important;
+        }
+
+        .yellow-value {
+            color: #ffd84d !important;
+            font-weight: 900 !important;
         }
 
 
@@ -1210,17 +1215,13 @@
             display: inline-block;
 
             padding: 9px 15px;
-
             margin-bottom: 15px;
 
             background: #ff6a00;
-
             color: #000;
 
             font-size: 8px;
-
             font-weight: 900;
-
             letter-spacing: 1.5px;
         }
 
@@ -1246,7 +1247,6 @@
 
         .team-side {
             padding: 40px;
-
             text-align: center;
         }
 
@@ -1254,9 +1254,7 @@
             color: #666;
 
             font-size: 9px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
         }
 
@@ -1264,7 +1262,6 @@
             margin-top: 15px;
 
             font-size: 31px;
-
             font-weight: 900;
         }
 
@@ -1272,7 +1269,6 @@
             color: #ff6a00;
 
             font-size: 31px;
-
             font-weight: 900;
         }
 
@@ -1281,12 +1277,14 @@
             height: 90px;
 
             object-fit: contain;
-
             display: block;
 
             margin: 0 auto 18px;
 
-            filter: drop-shadow(0 0 20px rgba(255,106,0,0.18));
+            filter:
+                drop-shadow(
+                    0 0 20px rgba(255,106,0,0.18)
+                );
         }
 
         .versus {
@@ -1299,7 +1297,6 @@
             color: #ff6a00;
 
             font-size: 35px;
-
             font-weight: 900;
         }
 
@@ -1311,18 +1308,17 @@
             color: #555;
 
             font-size: 8px;
-
             font-weight: 900;
-
             letter-spacing: 1.5px;
         }
 
 
-        /* GAME INFO */
+        /* =========================
+           GAME INFO
+        ========================= */
 
         .game-information {
             display: grid;
-
             grid-template-columns: repeat(3,1fr);
 
             margin-top: 12px;
@@ -1336,7 +1332,6 @@
             min-height: 100px;
 
             display: flex;
-
             flex-direction: column;
 
             align-items: center;
@@ -1353,9 +1348,7 @@
             color: #555;
 
             font-size: 8px;
-
             font-weight: 900;
-
             letter-spacing: 1.5px;
         }
 
@@ -1365,7 +1358,6 @@
             color: #fff;
 
             font-size: 13px;
-
             font-weight: 900;
         }
 
@@ -1395,16 +1387,13 @@
             gap: 10px;
 
             font-size: 19px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
         }
 
         .footer-logo img {
             width: 38px;
             height: 38px;
-
             object-fit: contain;
         }
 
@@ -1418,9 +1407,7 @@
             color: #555;
 
             font-size: 8px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
         }
 
@@ -1437,7 +1424,6 @@
                 padding: 20px;
 
                 flex-direction: column;
-
                 gap: 20px;
             }
 
@@ -1445,7 +1431,6 @@
                 gap: 16px;
 
                 flex-wrap: wrap;
-
                 justify-content: center;
             }
 
@@ -1468,7 +1453,6 @@
 
             .home-hero h1 {
                 font-size: 60px;
-
                 letter-spacing: -4px;
             }
 
@@ -1542,7 +1526,6 @@
 
             .game-information div {
                 border-right: none;
-
                 border-bottom: 1px solid #222;
             }
 
@@ -1550,8 +1533,6 @@
                 border-bottom: none;
             }
 
-
-            /* PERFIL MOBILE */
 
             .player-modal {
                 padding: 15px;
@@ -1569,11 +1550,9 @@
 
             .player-modal-photo {
                 min-height: 340px;
-
                 height: 340px;
 
                 border-right: none;
-
                 border-bottom: 1px solid #222;
             }
 
@@ -1602,14 +1581,12 @@
 
             .modal-number {
                 font-size: 60px;
-
                 margin-top: 20px;
             }
 
             .modal-stats {
                 margin-top: 20px;
             }
-
         }
 
 
@@ -1640,11 +1617,9 @@
             .modal-stats {
                 grid-template-columns: 1fr;
             }
-
         }
 
     </style>
-
 </head>
 
 
@@ -1679,7 +1654,6 @@
             INÍCIO
         </button>
 
-
         <button
             id="nav-plantel"
             onclick="showPage('plantel')"
@@ -1687,14 +1661,12 @@
             PLANTEL
         </button>
 
-
         <button
             id="nav-estatisticas"
             onclick="showPage('estatisticas')"
         >
             ESTATÍSTICAS
         </button>
-
 
         <button
             id="nav-jogos"
@@ -1708,13 +1680,11 @@
 </header>
 
 
-
 <!-- ==================================================
      INÍCIO
 ================================================== -->
 
 <main id="inicio" class="page active">
-
 
     <section class="home-hero">
 
@@ -1724,17 +1694,14 @@
                 PRO CLUBS · EA SPORTS FC
             </p>
 
-
             <h1>
                 NEXTGEN<br>
                 <span>UNITED</span>
             </h1>
 
-
             <p class="home-description">
                 FUTEBOL. COMPETIÇÃO. EQUIPA.
             </p>
-
 
             <div class="home-buttons">
 
@@ -1744,7 +1711,6 @@
                 >
                     VER PLANTEL
                 </button>
-
 
                 <button
                     class="second-button"
@@ -1771,7 +1737,6 @@
         </div>
 
     </section>
-
 
 
     <section class="home-record">
@@ -1818,23 +1783,17 @@
 </main>
 
 
-
 <!-- ==================================================
      PLANTEL
 ================================================== -->
 
 <main id="plantel" class="page">
 
-
     <section class="page-header">
 
-        <p>
-            FIRST TEAM
-        </p>
+        <p>FIRST TEAM</p>
 
-        <h1>
-            PLANTEL
-        </h1>
+        <h1>PLANTEL</h1>
 
         <span>
             NEXTGEN UNITED · PRO CLUBS
@@ -1935,7 +1894,6 @@
             </div>
 
         </div>
-
 
 
         <!-- DEFESAS -->
@@ -2098,7 +2056,6 @@
             </div>
 
         </div>
-
 
 
         <!-- MÉDIOS -->
@@ -2292,7 +2249,6 @@
         </div>
 
 
-
         <!-- AVANÇADOS -->
 
         <div class="position-group">
@@ -2366,11 +2322,9 @@
 
         </div>
 
-
     </section>
 
 </main>
-
 
 
 <!-- ==================================================
@@ -2378,7 +2332,6 @@
 ================================================== -->
 
 <main id="estatisticas" class="page">
-
 
     <section class="page-header">
 
@@ -2399,211 +2352,242 @@
 
     <section class="section stats-page-section">
 
-
         <div class="stats-table">
 
+            <!-- CABEÇALHO -->
 
             <div class="stats-header">
 
                 <span>JOGADOR</span>
+
                 <span>POS</span>
-                <span>JOGOS</span>
-                <span>GOLOS</span>
-                <span>ASSIST.</span>
-                <span>AMARELOS</span>
+
+                <button
+                    type="button"
+                    class="stats-sort"
+                    data-column="2"
+                >
+                    JOGOS
+                    <span class="sort-arrow"></span>
+                </button>
+
+                <button
+                    type="button"
+                    class="stats-sort"
+                    data-column="3"
+                >
+                    GOLOS
+                    <span class="sort-arrow"></span>
+                </button>
+
+                <button
+                    type="button"
+                    class="stats-sort"
+                    data-column="4"
+                >
+                    ASSIST.
+                    <span class="sort-arrow"></span>
+                </button>
+
+                <button
+                    type="button"
+                    class="stats-sort"
+                    data-column="5"
+                >
+                    AMARELOS
+                    <span class="sort-arrow"></span>
+                </button>
 
             </div>
 
 
-            <div class="stats-row">
+            <!-- GUARDA-REDES -->
+
+            <div class="stats-row goalkeeper-row">
                 <strong>NIGHTFACE</strong>
                 <span>GR</span>
                 <span>4</span>
-                <span>4</span>
+                <span class="goals-value">4</span>
                 <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row goalkeeper-row">
                 <strong>MOSCA</strong>
                 <span>GR</span>
                 <span>4</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row goalkeeper-row">
                 <strong>MJ_</strong>
                 <span>GR</span>
                 <span>2</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
 
-            <div class="stats-row">
+            <!-- DEFESAS -->
+
+            <div class="stats-row defender-row">
                 <strong>BANJAQUI</strong>
                 <span>DD</span>
                 <span>4</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row defender-row">
                 <strong>LOURO</strong>
                 <span>DC</span>
                 <span>3</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>1</span>
+                <span class="yellow-value">1</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row defender-row">
                 <strong>TXUBAS</strong>
                 <span>DD</span>
                 <span>0</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row defender-row">
                 <strong>DIOGO</strong>
                 <span>DC</span>
                 <span>2</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>1</span>
+                <span class="yellow-value">1</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row defender-row">
                 <strong>GB</strong>
                 <span>DC</span>
                 <span>2</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row defender-row">
                 <strong>SALES</strong>
                 <span>DC</span>
                 <span>0</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
 
-            <div class="stats-row">
+            <!-- MÉDIOS -->
+
+            <div class="stats-row midfielder-row">
                 <strong>DUDA</strong>
                 <span>MC</span>
                 <span>3</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>1</span>
+                <span class="yellow-value">1</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row midfielder-row">
                 <strong>RAFAEL</strong>
                 <span>MC</span>
                 <span>4</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row midfielder-row">
                 <strong>WOLF</strong>
                 <span>MC</span>
                 <span>0</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row midfielder-row">
                 <strong>KERMIT</strong>
                 <span>MC</span>
                 <span>0</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row midfielder-row">
                 <strong>ROGERIO</strong>
                 <span>MD</span>
                 <span>3</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row midfielder-row">
                 <strong>PEDRO</strong>
                 <span>ME</span>
                 <span>2</span>
-                <span>1</span>
+                <span class="goals-value">1</span>
                 <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
-
-            <div class="stats-row">
+            <div class="stats-row midfielder-row">
                 <strong>DOLLY</strong>
                 <span>ME</span>
                 <span>3</span>
-                <span>1</span>
+                <span class="goals-value">1</span>
                 <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
 
-            <div class="stats-row president-row">
+            <!-- MARTINS -->
+
+            <div class="stats-row martins-row">
                 <strong>MARTINS</strong>
                 <span>PL</span>
                 <span>0</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
 
 
-            <div class="stats-row captain-row">
+            <!-- TEDDY -->
+
+            <div class="stats-row teddy-row">
                 <strong>TEDDY</strong>
                 <span>PL</span>
                 <span>4</span>
-                <span>3</span>
+                <span class="goals-value">3</span>
                 <span>1</span>
-                <span>2</span>
+                <span class="yellow-value">2</span>
             </div>
 
+
+            <!-- CV -->
 
             <div class="stats-row">
                 <strong>CV</strong>
                 <span>—</span>
                 <span>0</span>
+                <span class="goals-value">0</span>
                 <span>0</span>
-                <span>0</span>
-                <span>0</span>
+                <span class="yellow-value">0</span>
             </div>
-
 
         </div>
 
@@ -2612,13 +2596,11 @@
 </main>
 
 
-
 <!-- ==================================================
      JOGOS
 ================================================== -->
 
 <main id="jogos" class="page">
-
 
     <section class="page-header">
 
@@ -2639,7 +2621,6 @@
 
     <section class="section games-page-section">
 
-
         <div class="game-status">
             PRÓXIMO JOGO
         </div>
@@ -2647,12 +2628,9 @@
 
         <div class="big-game-card">
 
-
             <div class="team-side">
 
-                <span>
-                    CASA
-                </span>
+                <span>CASA</span>
 
                 <img
                     class="team-logo"
@@ -2700,38 +2678,31 @@
 
             </div>
 
-
         </div>
 
 
         <div class="game-information">
-
 
             <div>
                 <span>DATA</span>
                 <strong>A DEFINIR</strong>
             </div>
 
-
             <div>
                 <span>HORA</span>
                 <strong>A DEFINIR</strong>
             </div>
-
 
             <div>
                 <span>COMPETIÇÃO</span>
                 <strong>PRO CLUBS</strong>
             </div>
 
-
         </div>
-
 
     </section>
 
 </main>
-
 
 
 <!-- ==================================================
@@ -2755,8 +2726,6 @@
         </button>
 
 
-        <!-- FOTO -->
-
         <div class="player-modal-photo">
 
             <img
@@ -2776,8 +2745,6 @@
 
         </div>
 
-
-        <!-- INFORMAÇÕES -->
 
         <div class="player-modal-info">
 
@@ -2820,7 +2787,6 @@
 
 
             <div class="modal-stats">
-
 
                 <div class="modal-stat">
 
@@ -2873,7 +2839,6 @@
 
                 </div>
 
-
             </div>
 
         </div>
@@ -2881,7 +2846,6 @@
     </div>
 
 </div>
-
 
 
 <!-- =========================
@@ -2908,7 +2872,6 @@
 </footer>
 
 
-
 <!-- =========================
      JAVASCRIPT
 ========================= -->
@@ -2922,10 +2885,13 @@
 
     function showPage(pageName) {
 
-        const pages = document.querySelectorAll(".page");
+        const pages =
+            document.querySelectorAll(".page");
 
         pages.forEach(function(page) {
+
             page.classList.remove("active");
+
         });
 
 
@@ -2933,7 +2899,9 @@
             document.getElementById(pageName);
 
         if (selectedPage) {
+
             selectedPage.classList.add("active");
+
         }
 
 
@@ -2941,15 +2909,21 @@
             document.querySelectorAll("nav button");
 
         buttons.forEach(function(button) {
+
             button.classList.remove("active");
+
         });
 
 
         const selectedButton =
-            document.getElementById("nav-" + pageName);
+            document.getElementById(
+                "nav-" + pageName
+            );
 
         if (selectedButton) {
+
             selectedButton.classList.add("active");
+
         }
 
 
@@ -2959,7 +2933,6 @@
         });
 
     }
-
 
 
     /* =========================
@@ -3153,7 +3126,6 @@
     };
 
 
-
     /* =========================
        ABRIR PERFIL
     ========================= */
@@ -3169,64 +3141,87 @@
 
 
         const modal =
-            document.getElementById("playerModal");
+            document.getElementById(
+                "playerModal"
+            );
 
         const image =
-            document.getElementById("modalPlayerImage");
+            document.getElementById(
+                "modalPlayerImage"
+            );
 
         const placeholder =
-            document.getElementById("modalPhotoPlaceholder");
+            document.getElementById(
+                "modalPhotoPlaceholder"
+            );
 
 
-        document.getElementById("modalPlayerName")
-            .textContent = playerName;
+        document.getElementById(
+            "modalPlayerName"
+        ).textContent = playerName;
 
 
-        document.getElementById("modalPlayerPosition")
-            .textContent = player.position;
+        document.getElementById(
+            "modalPlayerPosition"
+        ).textContent = player.position;
 
 
-        document.getElementById("modalPlayerNumber")
-            .textContent = player.number;
+        document.getElementById(
+            "modalPlayerNumber"
+        ).textContent = player.number;
 
 
-        document.getElementById("modalGames")
-            .textContent = player.games;
+        document.getElementById(
+            "modalGames"
+        ).textContent = player.games;
 
 
-        document.getElementById("modalGoals")
-            .textContent = player.goals;
+        document.getElementById(
+            "modalGoals"
+        ).textContent = player.goals;
 
 
-        document.getElementById("modalAssists")
-            .textContent = player.assists;
+        document.getElementById(
+            "modalAssists"
+        ).textContent = player.assists;
 
 
-        document.getElementById("modalYellow")
-            .textContent = player.yellow;
-
+        document.getElementById(
+            "modalYellow"
+        ).textContent = player.yellow;
 
 
         /* CARGO */
 
         const role =
-            document.getElementById("modalPlayerRole");
+            document.getElementById(
+                "modalPlayerRole"
+            );
+
 
         if (player.role) {
 
             role.textContent = player.role;
 
-            role.style.display = "inline-block";
+            role.style.display =
+                "inline-block";
+
 
             if (player.role === "CAPITÃO") {
 
-                role.style.color = "#ffd84d";
-                role.style.borderColor = "#d6a928";
+                role.style.color =
+                    "#ffd84d";
+
+                role.style.borderColor =
+                    "#d6a928";
 
             } else {
 
-                role.style.color = "#fff";
-                role.style.borderColor = "#555";
+                role.style.color =
+                    "#fff";
+
+                role.style.borderColor =
+                    "#555";
 
             }
 
@@ -3237,41 +3232,39 @@
         }
 
 
-
         /* FOTO */
 
         if (player.photo) {
 
             image.src = player.photo;
-
             image.alt = playerName;
 
-            image.style.display = "block";
+            image.style.display =
+                "block";
 
-            placeholder.style.display = "none";
+            placeholder.style.display =
+                "none";
 
         } else {
 
             image.src = "";
-
             image.alt = "";
 
-            image.style.display = "none";
+            image.style.display =
+                "none";
 
-            placeholder.style.display = "flex";
+            placeholder.style.display =
+                "flex";
 
         }
 
 
-
-        /* ABRIR */
-
         modal.classList.add("active");
 
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow =
+            "hidden";
 
     }
-
 
 
     /* =========================
@@ -3281,25 +3274,29 @@
     function closePlayer() {
 
         const modal =
-            document.getElementById("playerModal");
+            document.getElementById(
+                "playerModal"
+            );
 
         modal.classList.remove("active");
 
-        document.body.style.overflow = "";
+        document.body.style.overflow =
+            "";
 
     }
 
 
-
     /* =========================
-       FECHAR AO CLICAR FORA
+       FECHAR FORA
     ========================= */
 
     function closePlayerOutside(event) {
 
         if (
             event.target ===
-            document.getElementById("playerModal")
+            document.getElementById(
+                "playerModal"
+            )
         ) {
 
             closePlayer();
@@ -3309,9 +3306,8 @@
     }
 
 
-
     /* =========================
-       TECLA ESC
+       ESC
     ========================= */
 
     document.addEventListener(
@@ -3325,6 +3321,213 @@
         }
     );
 
+
+    /* =========================
+       ORDENAR ESTATÍSTICAS
+    ========================= */
+
+    const statsTable =
+        document.querySelector(
+            ".stats-table"
+        );
+
+    const sortButtons =
+        document.querySelectorAll(
+            ".stats-sort"
+        );
+
+    let currentSortColumn = null;
+
+    let sortAscending = false;
+
+
+    sortButtons.forEach(function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const column =
+                    Number(
+                        button.dataset.column
+                    );
+
+
+                /*
+                 * Primeiro clique:
+                 * maior -> menor
+                 *
+                 * Segundo clique:
+                 * menor -> maior
+                 */
+
+                if (
+                    currentSortColumn ===
+                    column
+                ) {
+
+                    sortAscending =
+                        !sortAscending;
+
+                } else {
+
+                    currentSortColumn =
+                        column;
+
+                    sortAscending =
+                        false;
+
+                }
+
+
+                /* RESET DOS BOTÕES */
+
+                sortButtons.forEach(
+                    function(otherButton) {
+
+                        otherButton.classList
+                            .remove("active");
+
+                        const arrow =
+                            otherButton
+                                .querySelector(
+                                    ".sort-arrow"
+                                );
+
+                        if (arrow) {
+                            arrow.textContent =
+                                "";
+                        }
+
+                    }
+                );
+
+
+                /* BOTÃO ATIVO */
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                const selectedArrow =
+                    button.querySelector(
+                        ".sort-arrow"
+                    );
+
+
+                if (selectedArrow) {
+
+                    selectedArrow.textContent =
+                        sortAscending
+                            ? "▲"
+                            : "▼";
+
+                }
+
+
+                /* TODAS AS LINHAS */
+
+                const rows =
+                    Array.from(
+                        statsTable.querySelectorAll(
+                            ".stats-row"
+                        )
+                    );
+
+
+                /*
+                 * Guardamos a posição original
+                 * para manter uma ordem estável
+                 * quando os valores são iguais.
+                 */
+
+                rows.forEach(
+                    function(row, index) {
+
+                        row.dataset.originalIndex =
+                            index;
+
+                    }
+                );
+
+
+                /* ORDENAR */
+
+                rows.sort(
+                    function(a, b) {
+
+                        const aValue =
+                            Number(
+                                a.children[column]
+                                    .textContent
+                                    .trim()
+                            );
+
+                        const bValue =
+                            Number(
+                                b.children[column]
+                                    .textContent
+                                    .trim()
+                            );
+
+
+                        if (
+                            aValue ===
+                            bValue
+                        ) {
+
+                            return (
+                                Number(
+                                    a.dataset
+                                        .originalIndex
+                                ) -
+                                Number(
+                                    b.dataset
+                                        .originalIndex
+                                )
+                            );
+
+                        }
+
+
+                        if (
+                            sortAscending
+                        ) {
+
+                            return (
+                                aValue -
+                                bValue
+                            );
+
+                        }
+
+
+                        return (
+                            bValue -
+                            aValue
+                        );
+
+                    }
+                );
+
+
+                /* RECOLOCAR LINHAS */
+
+                rows.forEach(
+                    function(row) {
+
+                        statsTable.appendChild(
+                            row
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    });
 
 </script>
 
