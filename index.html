@@ -1989,7 +1989,7 @@ body.admin-locked [data-attendance-click], body.admin-locked .attendance-cell { 
                 <a href="#" class="disabled" onclick="return false;">HISTÓRICO DE LIGAS</a>
                 <div class="competition-dropdown-title">TORNEIOS</div>
                 <a href="https://discord.gg/kj3EvDWaH" target="_blank" rel="noopener noreferrer">PFVL</a>
-                <a href="#torneios-historico" onclick="openTournamentHistory(event);">HISTÓRICO DE TORNEIOS</a>
+                <a href="#torneios-historico" onclick="event.preventDefault(); var s=document.getElementById('torneios-historico'); if(s){s.classList.add('active'); s.style.display='block';} var m=document.getElementById('competitionMenu'); if(m)m.classList.remove('open'); setTimeout(function(){if(s)s.scrollIntoView({behavior:'smooth',block:'start'});},30); return false;">HISTÓRICO DE TORNEIOS</a>
             </div>
         </div>
 
@@ -4126,18 +4126,14 @@ const ADMIN_EMAIL = "miguelrrangelo12@gmail.com";
 // Esta função fica no âmbito global porque é chamada pelo onclick do link.
 function openTournamentHistory(event) {
   if (event) event.preventDefault();
-
-  const section = document.getElementById("torneios-historico");
-  if (!section) return;
-
+  var section = document.getElementById("torneios-historico");
+  if (!section) return false;
   section.classList.add("active");
-
-  const competitionMenu = document.getElementById("competitionMenu");
+  section.style.display = "block";
+  var competitionMenu = document.getElementById("competitionMenu");
   if (competitionMenu) competitionMenu.classList.remove("open");
-
-  requestAnimationFrame(function () {
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+  setTimeout(function(){ section.scrollIntoView({behavior:"smooth", block:"start"}); }, 30);
+  return false;
 }
 </script>
 
