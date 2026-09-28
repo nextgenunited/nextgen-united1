@@ -4121,6 +4121,24 @@ const ADMIN_EMAIL = "miguelrrangelo12@gmail.com";
   }
   loadFirebaseScripts();
 })();
+
+// Abre o histórico de torneios a partir do menu COMPETIÇÕES.
+// Esta função fica no âmbito global porque é chamada pelo onclick do link.
+function openTournamentHistory(event) {
+  if (event) event.preventDefault();
+
+  const section = document.getElementById("torneios-historico");
+  if (!section) return;
+
+  section.classList.add("active");
+
+  const competitionMenu = document.getElementById("competitionMenu");
+  if (competitionMenu) competitionMenu.classList.remove("open");
+
+  requestAnimationFrame(function () {
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 </script>
 
 
