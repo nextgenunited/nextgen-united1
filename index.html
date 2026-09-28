@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NextGen United</title>
+    <title>NEXTGEN UNITED</title>
 
-    <!-- SÍMBOLO DO SITE -->
-    <link rel="icon" type="image/png" href="934ac44a-e10c-41e5-9046-b4cedfea3d9e.png">
+    <!-- LOGO / FAVICON -->
+    <link rel="icon" type="image/png" href="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png">
+    <link rel="apple-touch-icon" href="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png">
 
     <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
@@ -21,390 +28,742 @@
         }
 
         body {
+            background: #070707;
+            color: #fff;
             font-family: Arial, Helvetica, sans-serif;
-            background: #050505;
-            color: white;
             min-height: 100vh;
         }
 
-        header {
-            height: 76px;
-            background: #0b0b0b;
-            border-bottom: 1px solid #222;
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            width: 100%;
+            min-height: 78px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 6%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+
+            padding: 0 7%;
+
+            background: rgba(5,5,5,0.97);
+
+            border-bottom: 1px solid #242424;
         }
 
         .logo {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+
+            font-size: 21px;
             font-weight: 900;
-            letter-spacing: -0.5px;
-            color: white;
-            font-style: italic;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+
+            background: none;
+            border: none;
+            padding: 0;
         }
 
-        .logo:hover {
-            opacity: 0.8;
+        /* LOGO DO HEADER */
+        .logo img {
+            width: 52px;
+            height: 52px;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+        .logo span {
+            color: #ff6a00;
         }
 
         nav {
             display: flex;
-            gap: 8px;
+            align-items: center;
+            gap: 32px;
         }
 
         nav button {
-            background: transparent;
-            border: none;
+            position: relative;
+
+            border: 0;
+            background: none;
+
             color: #777;
-            padding: 12px 16px;
-            font-size: 11px;
+
+            font-size: 10px;
             font-weight: 900;
-            letter-spacing: 1.5px;
+
+            letter-spacing: 1.7px;
+
             cursor: pointer;
+
             transition: 0.2s ease;
         }
 
-        nav button:hover,
+        nav button:hover {
+            color: #fff;
+        }
+
         nav button.active {
             color: #ff6a00;
         }
 
+        nav button.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: -9px;
+
+            height: 2px;
+
+            background: #ff6a00;
+        }
+
+
+        /* =========================
+           PAGES
+        ========================= */
+
         .page {
             display: none;
-            min-height: calc(100vh - 76px);
         }
 
         .page.active {
             display: block;
         }
 
+
         /* =========================
-           INÍCIO
+           HOME
         ========================= */
 
-        .hero {
-            min-height: calc(100vh - 76px);
+        .home-hero {
+            min-height: calc(100vh - 78px);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 80px 8%;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 80% 50%,
+                    rgba(255,106,0,0.15),
+                    transparent 35%
+                ),
+                #080808;
+        }
+
+        .home-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            color: #ff6a00;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 22px;
+        }
+
+        .home-hero h1 {
+            font-size: clamp(65px, 10vw, 145px);
+
+            line-height: 0.82;
+
+            font-weight: 900;
+
+            letter-spacing: -6px;
+        }
+
+        .home-hero h1 span {
+            color: #ff6a00;
+        }
+
+        .home-description {
+            margin-top: 35px;
+
+            color: #777;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 4px;
+        }
+
+        .home-buttons {
+            display: flex;
+            gap: 12px;
+
+            margin-top: 38px;
+        }
+
+        .main-button,
+        .second-button {
+            min-height: 48px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 27px;
+
+            border: none;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .main-button {
+            background: #ff6a00;
+            color: #000;
+        }
+
+        .main-button:hover {
+            background: #fff;
+        }
+
+        .second-button {
+            background: transparent;
+
+            border: 1px solid #333;
+
+            color: #aaa;
+        }
+
+        .second-button:hover {
+            color: #fff;
+            border-color: #ff6a00;
+        }
+
+
+        /* DECORAÇÃO */
+
+        .home-decoration {
+            position: relative;
+
+            width: 400px;
+            height: 400px;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 60px 20px;
-            background:
-                radial-gradient(circle at center, #171717 0%, #080808 45%, #050505 100%);
         }
 
-        .hero-content {
-            max-width: 900px;
+        .decoration-circle {
+            position: absolute;
+
+            width: 330px;
+            height: 330px;
+
+            border: 1px solid #333;
+
+            border-radius: 50%;
         }
 
-        .hero p {
-            color: #ff6a00;
-            font-size: 11px;
+        .decoration-circle::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 30px;
+
+            border: 1px solid #ff6a00;
+
+            border-radius: 50%;
+        }
+
+        .decoration-text {
+            position: relative;
+
+            color: #1c1c1c;
+
+            font-size: 110px;
+
             font-weight: 900;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
+
+            letter-spacing: -8px;
         }
 
-        .hero h1 {
-            font-size: clamp(55px, 10vw, 120px);
-            line-height: 0.9;
-            font-weight: 900;
-            font-style: italic;
-            letter-spacing: -5px;
-            margin-bottom: 25px;
+
+        /* =========================
+           LOGO NA DECORAÇÃO DA HOME
+        ========================= */
+
+        .decoration-logo {
+            position: relative;
+            z-index: 2;
+
+            width: 170px;
+            height: 170px;
+
+            object-fit: contain;
         }
 
-        .hero h1 span {
+
+        /* HOME RECORD */
+
+        .home-record {
+            display: grid;
+
+            grid-template-columns: 220px 1fr;
+
+            gap: 40px;
+
+            padding: 50px 8%;
+
+            border-top: 1px solid #222;
+
+            background: #050505;
+        }
+
+        .record-title p {
             color: #ff6a00;
-        }
 
-        .hero-subtitle {
-            color: #777;
-            font-size: 14px;
+            font-size: 9px;
+            font-weight: 900;
+
             letter-spacing: 2px;
         }
 
-        .season-record {
-            margin: 55px auto 0;
-            max-width: 650px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            border: 1px solid #222;
-            background: #0b0b0b;
-        }
+        .record-title h2 {
+            margin-top: 7px;
 
-        .record-item {
-            padding: 25px 10px;
-            border-right: 1px solid #222;
-        }
+            font-size: 25px;
 
-        .record-item:last-child {
-            border-right: none;
-        }
-
-        .record-item strong {
-            display: block;
-            font-size: 30px;
-            color: white;
-            margin-bottom: 6px;
-        }
-
-        .record-item span {
-            color: #666;
-            font-size: 9px;
             font-weight: 900;
-            letter-spacing: 1.5px;
         }
+
+        .home-stats {
+            display: grid;
+
+            grid-template-columns: repeat(4,1fr);
+        }
+
+        .home-stats div {
+            min-height: 100px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            border-left: 1px solid #222;
+        }
+
+        .home-stats strong {
+            color: #ff6a00;
+
+            font-size: 38px;
+
+            font-weight: 900;
+        }
+
+        .home-stats span {
+            margin-top: 6px;
+
+            color: #666;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
 
         /* =========================
-           PÁGINAS
+           PAGE HEADER
         ========================= */
 
         .page-header {
-            padding: 70px 6% 40px;
-            border-bottom: 1px solid #181818;
+            padding: 100px 8% 70px;
+
+            border-bottom: 1px solid #1d1d1d;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #090909,
+                    #0d0d0d
+                );
         }
 
         .page-header p {
             color: #ff6a00;
+
             font-size: 10px;
+
             font-weight: 900;
+
             letter-spacing: 3px;
+
             margin-bottom: 12px;
         }
 
         .page-header h1 {
-            font-size: clamp(40px, 6vw, 70px);
+            font-size: clamp(50px,7vw,90px);
+
+            line-height: 0.9;
+
             font-weight: 900;
-            font-style: italic;
-            letter-spacing: -3px;
+
+            letter-spacing: -4px;
         }
+
+        .page-header span {
+            display: block;
+
+            margin-top: 22px;
+
+            color: #555;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           SECTIONS
+        ========================= */
 
         .section {
-            max-width: 1200px;
+            width: 100%;
+
+            max-width: 1300px;
+
             margin: 0 auto;
-            padding: 55px 25px;
+
+            padding: 90px 7%;
         }
 
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .section-title > span {
-            width: 5px;
-            height: 45px;
-            background: #ff6a00;
-        }
-
-        .section-title p {
-            color: #ff6a00;
-            font-size: 9px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
-        }
-
-        .section-title h2 {
-            font-size: 28px;
-            font-weight: 900;
-            font-style: italic;
-        }
 
         /* =========================
            PLANTEL
         ========================= */
 
         .position-group {
-            margin-bottom: 55px;
+            margin-bottom: 70px;
         }
 
         .position-title {
             display: flex;
+
             align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
 
-        .position-title .number {
-            color: #444;
-            font-size: 10px;
-            font-weight: 900;
-        }
+            gap: 13px;
 
-        .position-title h3 {
-            font-size: 12px;
+            margin-bottom: 20px;
+
+            font-size: 11px;
+
             font-weight: 900;
+
             letter-spacing: 2px;
+
+            color: #777;
         }
 
-        .position-line {
-            height: 1px;
-            background: #222;
-            flex: 1;
+        .position-title span {
+            color: #ff6a00;
+            font-size: 10px;
         }
 
-        .players-grid {
+        .goalkeeper-title span {
+            color: #8b5cf6;
+        }
+
+        .defender-title span {
+            color: #ff6a00;
+        }
+
+        .midfielder-title span {
+            color: #1683ff;
+        }
+
+        .attacker-title span {
+            color: #e53935;
+        }
+
+
+        /* PLAYERS */
+
+        .players {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(auto-fit,minmax(245px,1fr));
+
             gap: 12px;
         }
 
         .player-card {
-            min-height: 105px;
-            background: #0d0d0d;
-            border: 1px solid #202020;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             position: relative;
+
+            min-height: 105px;
+
+            display: flex;
+
+            align-items: center;
+
+            background: #0d0d0d;
+
+            border: 1px solid #202020;
+
             overflow: hidden;
+
             transition: 0.2s ease;
         }
 
         .player-card:hover {
             transform: translateY(-3px);
-            border-color: #444;
-        }
 
-        .player-info {
-            position: relative;
-            z-index: 2;
-        }
+            background: #131313;
 
-        .player-info small {
-            display: block;
-            color: #666;
-            font-size: 8px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            margin-bottom: 7px;
-        }
-
-        .player-info h4 {
-            font-size: 18px;
-            font-weight: 900;
-            font-style: italic;
+            border-color: #3a3a3a;
         }
 
         .player-number {
-            font-size: 45px;
+            width: 80px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 31px;
+
             font-weight: 900;
-            font-style: italic;
-            color: #222;
-            line-height: 1;
+
+            color: #333;
         }
 
-        /* CORES DAS POSIÇÕES */
+        .player-info h3 {
+            font-size: 14px;
 
-        .goalkeepers .player-card {
+            font-weight: 900;
+
+            letter-spacing: 0.8px;
+        }
+
+        .player-info p {
+            margin-top: 6px;
+
+            color: #666;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        /* CORES POSIÇÕES */
+
+        .goalkeeper {
             border-left: 4px solid #8b5cf6;
         }
 
-        .goalkeepers .player-info small {
+        .goalkeeper .player-number {
             color: #8b5cf6;
         }
 
-        .defenders .player-card {
+        .defender {
             border-left: 4px solid #ff6a00;
         }
 
-        .defenders .player-info small {
+        .defender .player-number {
             color: #ff6a00;
         }
 
-        .midfielders .player-card {
-            border-left: 4px solid #168cff;
+        .midfielder {
+            border-left: 4px solid #1683ff;
         }
 
-        .midfielders .player-info small {
-            color: #168cff;
+        .midfielder .player-number {
+            color: #1683ff;
         }
 
-        .attackers .player-card {
-            border-left: 4px solid #ff3030;
+        .attacker {
+            border-left: 4px solid #e53935;
         }
 
-        .attackers .player-info small {
-            color: #ff3030;
+        .attacker .player-number {
+            color: #e53935;
         }
 
-        /* CAPITÃO */
-
-        .captain {
-            border-left: 4px solid #d6a928 !important;
-            background: #151208;
-        }
-
-        .captain .player-info small {
-            color: #d6a928 !important;
-        }
-
-        .captain .player-info h4 {
-            color: #ffd84d;
-        }
 
         /* PRESIDENTE */
 
         .president {
-            border-left: 4px solid #555 !important;
-            background: #080808;
+            border-left-color: #fff;
+
+            background: #050505;
         }
 
-        .president .player-info small {
-            color: #aaa !important;
+        .president .player-number {
+            color: #fff;
         }
+
+        .president .player-info h3 {
+            color: #fff;
+        }
+
+
+        /* CAPITÃO */
+
+        .captain {
+            border-left-color: #d6a928;
+
+            background: #121006;
+        }
+
+        .captain .player-number {
+            color: #d6a928;
+        }
+
+        .captain .player-info h3 {
+            color: #ffd84d;
+        }
+
+
+        .role {
+            position: absolute;
+
+            top: 14px;
+            right: 14px;
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+        .president-role {
+            color: #777;
+        }
+
+        .captain-role {
+            color: #d6a928;
+        }
+
 
         /* =========================
            ESTATÍSTICAS
         ========================= */
 
-        .player-stats-section {
-            max-width: 1200px;
+        .stats-page-section {
+            max-width: 1250px;
         }
 
         .stats-table {
             width: 100%;
+
             background: #0b0b0b;
-            border: 1px solid #242424;
-            border-radius: 4px;
+
+            border: 1px solid #252525;
+
+            border-radius: 5px;
+
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.35);
         }
 
         .stats-header {
             display: grid;
-            grid-template-columns: 2.2fr 0.7fr 0.9fr 0.9fr 1fr 1fr;
-            padding: 20px 25px;
+
+            grid-template-columns:
+                2.2fr
+                0.7fr
+                0.9fr
+                0.9fr
+                1fr
+                1fr;
+
+            align-items: center;
+
+            min-height: 62px;
+
+            padding: 0 25px;
+
             background: #111;
+
             border-bottom: 2px solid #ff6a00;
+
             color: #ff6a00;
-            font-size: 10px;
+
+            font-size: 9px;
+
             font-weight: 900;
-            letter-spacing: 1.8px;
+
+            letter-spacing: 1.6px;
         }
 
         .stats-row {
             display: grid;
-            grid-template-columns: 2.2fr 0.7fr 0.9fr 0.9fr 1fr 1fr;
+
+            grid-template-columns:
+                2.2fr
+                0.7fr
+                0.9fr
+                0.9fr
+                1fr
+                1fr;
+
             align-items: center;
+
             min-height: 64px;
+
             padding: 0 25px;
+
             background: #0b0b0b;
-            border-bottom: 1px solid #1d1d1d;
+
+            border-bottom: 1px solid #1c1c1c;
+
             color: #aaa;
-            font-size: 13px;
+
+            font-size: 12px;
+
             transition: 0.2s ease;
         }
 
@@ -414,39 +773,53 @@
 
         .stats-row:hover {
             background: #151515;
-            box-shadow: inset 4px 0 0 #ff6a00;
+
+            box-shadow:
+                inset 4px 0 0 #ff6a00;
         }
 
         .stats-row strong {
             color: #fff;
-            font-size: 14px;
+
+            font-size: 13px;
+
             font-weight: 900;
-            letter-spacing: 0.5px;
+
+            letter-spacing: 0.6px;
         }
 
         .stats-row span:nth-child(2) {
             color: #666;
-            font-size: 10px;
+
+            font-size: 9px;
+
             font-weight: 900;
         }
 
         .stats-row span:nth-child(n+3) {
             color: #ddd;
+
             font-weight: 700;
         }
 
         .stats-row span:nth-child(4) {
             color: #ff6a00;
+
             font-weight: 900;
         }
 
         .stats-row span:nth-child(6) {
             color: #d6a900;
+
             font-weight: 900;
         }
 
+
+        /* PRESIDENTE NA TABELA */
+
         .stats-row.president-row {
             background: #080808;
+
             border-left: 4px solid #555;
         }
 
@@ -454,8 +827,12 @@
             color: #fff;
         }
 
+
+        /* CAPITÃO NA TABELA */
+
         .stats-row.captain-row {
             background: #151208;
+
             border-left: 4px solid #d6a928;
         }
 
@@ -463,97 +840,230 @@
             color: #ffd84d;
         }
 
-        .stats-row.captain-row span:nth-child(4) {
-            color: #ff6a00;
-        }
-
-        .stats-row:nth-child(4),
-        .stats-row:nth-child(10),
-        .stats-row:nth-child(17) {
-            border-top: 12px solid #070707;
-        }
 
         /* =========================
            JOGOS
         ========================= */
 
-        .next-match {
-            max-width: 900px;
-            margin: 50px auto;
-            background: #0b0b0b;
-            border: 1px solid #222;
-            position: relative;
-            overflow: hidden;
+        .games-page-section {
+            max-width: 1150px;
         }
 
-        .next-match::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
+        .game-status {
+            display: inline-block;
+
+            padding: 9px 15px;
+
+            margin-bottom: 15px;
+
             background: #ff6a00;
-        }
 
-        .match-top {
-            text-align: center;
-            padding: 30px 20px 10px;
-        }
+            color: #000;
 
-        .match-top p {
-            color: #ff6a00;
-            font-size: 9px;
+            font-size: 8px;
+
             font-weight: 900;
-            letter-spacing: 3px;
+
+            letter-spacing: 1.5px;
         }
 
-        .match-teams {
+        .big-game-card {
+            min-height: 280px;
+
             display: grid;
-            grid-template-columns: 1fr auto 1fr;
+
+            grid-template-columns:
+                1fr 180px 1fr;
+
             align-items: center;
-            gap: 30px;
-            padding: 45px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #151515,
+                    #0a0a0a
+                );
+
+            border: 1px solid #252525;
+        }
+
+        .team-side {
+            padding: 40px;
+
             text-align: center;
         }
 
-        .team-name {
-            font-size: clamp(22px, 4vw, 40px);
-            font-weight: 900;
-            font-style: italic;
+        /* LOGO DO JOGO */
+        .team-logo {
+            width: 105px;
+            height: 105px;
+
+            object-fit: contain;
+
+            display: block;
+
+            margin: 0 auto 18px;
         }
 
-        .vs {
+        .team-side span {
+            color: #666;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+        .team-side h2 {
+            margin-top: 15px;
+
+            font-size: 31px;
+
+            font-weight: 900;
+        }
+
+        .team-side strong {
             color: #ff6a00;
-            font-size: 16px;
+
+            font-size: 31px;
+
             font-weight: 900;
         }
 
-        .match-info {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding: 20px;
-            border-top: 1px solid #222;
-            color: #777;
-            font-size: 10px;
-            font-weight: 900;
-            letter-spacing: 1px;
+        .versus {
+            text-align: center;
         }
+
+        .versus span {
+            display: block;
+
+            color: #ff6a00;
+
+            font-size: 35px;
+
+            font-weight: 900;
+        }
+
+        .versus small {
+            display: block;
+
+            margin-top: 10px;
+
+            color: #555;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        /* GAME INFO */
+
+        .game-information {
+            display: grid;
+
+            grid-template-columns: repeat(3,1fr);
+
+            margin-top: 12px;
+
+            background: #0b0b0b;
+
+            border: 1px solid #222;
+        }
+
+        .game-information div {
+            min-height: 100px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            border-right: 1px solid #222;
+        }
+
+        .game-information div:last-child {
+            border-right: none;
+        }
+
+        .game-information span {
+            color: #555;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+        }
+
+        .game-information strong {
+            margin-top: 9px;
+
+            color: #fff;
+
+            font-size: 13px;
+
+            font-weight: 900;
+        }
+
 
         /* =========================
            FOOTER
         ========================= */
 
         footer {
-            border-top: 1px solid #1a1a1a;
-            padding: 30px 6%;
+            margin-top: 60px;
+
+            padding: 55px 7%;
+
             text-align: center;
-            color: #444;
-            font-size: 9px;
+
+            background: #050505;
+
+            border-top: 1px solid #222;
+        }
+
+        /* LOGO DO FOOTER */
+        .footer-logo img {
+            width: 70px;
+            height: 70px;
+
+            object-fit: contain;
+
+            display: block;
+
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 19px;
+
             font-weight: 900;
+
             letter-spacing: 2px;
         }
+
+        .footer-logo span {
+            color: #ff6a00;
+        }
+
+        footer p {
+            margin-top: 10px;
+
+            color: #555;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
 
         /* =========================
            MOBILE
@@ -561,44 +1071,89 @@
 
         @media (max-width: 800px) {
 
-            header {
-                padding: 0 20px;
-            }
+            .header {
+                position: relative;
 
-            .logo {
-                font-size: 16px;
+                padding: 20px;
+
+                flex-direction: column;
+
+                gap: 20px;
             }
 
             nav {
-                gap: 0;
+                gap: 16px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
             }
 
             nav button {
-                padding: 10px 7px;
-                font-size: 8px;
-                letter-spacing: 0.8px;
+                font-size: 9px;
             }
 
-            .players-grid {
+            nav button.active::after {
+                display: none;
+            }
+
+
+            .home-hero {
+                min-height: 80vh;
+
+                padding: 90px 7%;
+
+                display: block;
+            }
+
+            .home-hero h1 {
+                font-size: 60px;
+
+                letter-spacing: -4px;
+            }
+
+            .home-decoration {
+                display: none;
+            }
+
+
+            .home-record {
+                display: block;
+
+                padding: 45px 7%;
+            }
+
+            .record-title {
+                margin-bottom: 30px;
+            }
+
+            .home-stats {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .home-stats div {
+                border: 1px solid #222;
+            }
+
+
+            .page-header {
+                padding: 70px 7% 55px;
+            }
+
+            .page-header h1 {
+                font-size: 55px;
+            }
+
+
+            .section {
+                padding: 65px 5%;
+            }
+
+
+            .players {
                 grid-template-columns: 1fr;
             }
 
-            .season-record {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .record-item:nth-child(2) {
-                border-right: none;
-            }
-
-            .record-item:nth-child(-n+2) {
-                border-bottom: 1px solid #222;
-            }
-
-            .match-teams {
-                padding: 35px 15px;
-                gap: 10px;
-            }
 
             .stats-table {
                 overflow-x: auto;
@@ -608,672 +1163,968 @@
             .stats-row {
                 min-width: 720px;
             }
+
+
+            .big-game-card {
+                grid-template-columns: 1fr;
+
+                padding: 30px 0;
+            }
+
+            .versus {
+                padding: 10px;
+            }
+
+
+            .game-information {
+                grid-template-columns: 1fr;
+            }
+
+            .game-information div {
+                border-right: none;
+
+                border-bottom: 1px solid #222;
+            }
+
+            .game-information div:last-child {
+                border-bottom: none;
+            }
+
         }
+
+
+        @media (max-width: 450px) {
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .logo img {
+                width: 46px;
+                height: 46px;
+            }
+
+            .home-hero h1 {
+                font-size: 50px;
+            }
+
+            .home-buttons {
+                flex-direction: column;
+            }
+
+            .main-button,
+            .second-button {
+                width: 100%;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================= -->
 
-    <header>
+<!-- =========================
+     MENU
+========================= -->
 
-        <button class="logo" onclick="showPage('inicio')">
-            NEXTGEN UNITED
+<header class="header">
+
+    <button class="logo" onclick="showPage('inicio')" aria-label="NextGen United">
+        <img
+            src="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png"
+            alt="NextGen United"
+        >
+    </button>
+
+
+    <nav>
+
+        <button
+            id="nav-inicio"
+            class="active"
+            onclick="showPage('inicio')"
+        >
+            INÍCIO
         </button>
 
-        <nav>
-            <button class="nav-btn active" onclick="showPage('inicio')">
-                INÍCIO
-            </button>
 
-            <button class="nav-btn" onclick="showPage('plantel')">
-                PLANTEL
-            </button>
-
-            <button class="nav-btn" onclick="showPage('estatisticas')">
-                ESTATÍSTICAS
-            </button>
-
-            <button class="nav-btn" onclick="showPage('jogos')">
-                JOGOS
-            </button>
-        </nav>
-
-    </header>
+        <button
+            id="nav-plantel"
+            onclick="showPage('plantel')"
+        >
+            PLANTEL
+        </button>
 
 
-    <!-- =========================
-         INÍCIO
-    ========================= -->
+        <button
+            id="nav-estatisticas"
+            onclick="showPage('estatisticas')"
+        >
+            ESTATÍSTICAS
+        </button>
 
-    <main id="inicio" class="page active">
 
-        <section class="hero">
+        <button
+            id="nav-jogos"
+            onclick="showPage('jogos')"
+        >
+            JOGOS
+        </button>
 
-            <div class="hero-content">
+    </nav>
 
-                <p>PRO CLUBS • COMPETITIVE TEAM</p>
+</header>
 
-                <h1>
-                    NEXTGEN<br>
-                    <span>UNITED</span>
-                </h1>
 
-                <div class="hero-subtitle">
-                    FOOTBALL. TEAMWORK. NEXT LEVEL.
-                </div>
 
-                <div class="season-record">
+<!-- ==================================================
+     INÍCIO
+================================================== -->
 
-                    <div class="record-item">
-                        <strong>24</strong>
-                        <span>JOGOS</span>
-                    </div>
+<main id="inicio" class="page active">
 
-                    <div class="record-item">
-                        <strong>17</strong>
-                        <span>VITÓRIAS</span>
-                    </div>
 
-                    <div class="record-item">
-                        <strong>4</strong>
-                        <span>EMPATES</span>
-                    </div>
+    <section class="home-hero">
 
-                    <div class="record-item">
-                        <strong>3</strong>
-                        <span>DERROTAS</span>
-                    </div>
+        <div class="home-content">
 
-                </div>
+            <p class="eyebrow">
+                PRO CLUBS · EA SPORTS FC
+            </p>
+
+
+            <h1>
+                NEXTGEN<br>
+                <span>UNITED</span>
+            </h1>
+
+
+            <p class="home-description">
+                FUTEBOL. COMPETIÇÃO. EQUIPA.
+            </p>
+
+
+            <div class="home-buttons">
+
+                <button
+                    class="main-button"
+                    onclick="showPage('plantel')"
+                >
+                    VER PLANTEL
+                </button>
+
+
+                <button
+                    class="second-button"
+                    onclick="showPage('jogos')"
+                >
+                    PRÓXIMO JOGO
+                </button>
 
             </div>
 
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         PLANTEL
-    ========================= -->
-
-    <main id="plantel" class="page">
-
-        <div class="page-header">
-            <p>NEXTGEN UNITED</p>
-            <h1>PLANTEL</h1>
         </div>
 
 
-        <section class="section">
+        <div class="home-decoration">
 
-            <!-- GUARDA-REDES -->
+            <div class="decoration-circle"></div>
 
-            <div class="position-group goalkeepers">
+            <img
+                class="decoration-logo"
+                src="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png"
+                alt="NextGen United"
+            >
 
-                <div class="position-title">
-                    <span class="number">01</span>
-                    <h3>GUARDA-REDES</h3>
-                    <div class="position-line"></div>
-                </div>
-
-                <div class="players-grid">
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>GR</small>
-                            <h4>MOSCA</h4>
-                        </div>
-                        <div class="player-number">99</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>GR</small>
-                            <h4>NIGHTFACE</h4>
-                        </div>
-                        <div class="player-number">1</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>GR</small>
-                            <h4>MJ_</h4>
-                        </div>
-                        <div class="player-number">12</div>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- DEFESAS -->
-
-            <div class="position-group defenders">
-
-                <div class="position-title">
-                    <span class="number">02</span>
-                    <h3>DEFESAS</h3>
-                    <div class="position-line"></div>
-                </div>
-
-                <div class="players-grid">
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>DD</small>
-                            <h4>BANJAQUI</h4>
-                        </div>
-                        <div class="player-number">2</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>DC</small>
-                            <h4>LOURO</h4>
-                        </div>
-                        <div class="player-number">5</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>DD</small>
-                            <h4>TXUBAS</h4>
-                        </div>
-                        <div class="player-number">23</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>DC</small>
-                            <h4>DIOGO</h4>
-                        </div>
-                        <div class="player-number">4</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>DC</small>
-                            <h4>GB</h4>
-                        </div>
-                        <div class="player-number">18</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>DC</small>
-                            <h4>SALES</h4>
-                        </div>
-                        <div class="player-number">15</div>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- MÉDIOS -->
-
-            <div class="position-group midfielders">
-
-                <div class="position-title">
-                    <span class="number">03</span>
-                    <h3>MÉDIOS</h3>
-                    <div class="position-line"></div>
-                </div>
-
-                <div class="players-grid">
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>MC</small>
-                            <h4>DUDA</h4>
-                        </div>
-                        <div class="player-number">16</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>MC</small>
-                            <h4>RAFAEL</h4>
-                        </div>
-                        <div class="player-number">20</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>MC</small>
-                            <h4>WOLF</h4>
-                        </div>
-                        <div class="player-number">45</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>MC</small>
-                            <h4>KERMIT</h4>
-                        </div>
-                        <div class="player-number">36</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>MD</small>
-                            <h4>ROGERIO</h4>
-                        </div>
-                        <div class="player-number">65</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>ME</small>
-                            <h4>PEDRO</h4>
-                        </div>
-                        <div class="player-number">69</div>
-                    </div>
-
-                    <div class="player-card">
-                        <div class="player-info">
-                            <small>ME</small>
-                            <h4>DOLLY</h4>
-                        </div>
-                        <div class="player-number">78</div>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- AVANÇADOS -->
-
-            <div class="position-group attackers">
-
-                <div class="position-title">
-                    <span class="number">04</span>
-                    <h3>AVANÇADOS</h3>
-                    <div class="position-line"></div>
-                </div>
-
-                <div class="players-grid">
-
-                    <div class="player-card president">
-                        <div class="player-info">
-                            <small>PL • PRESIDENTE</small>
-                            <h4>MARTINS</h4>
-                        </div>
-                        <div class="player-number">10</div>
-                    </div>
-
-                    <div class="player-card captain">
-                        <div class="player-info">
-                            <small>PL • CAPITÃO</small>
-                            <h4>TEDDY</h4>
-                        </div>
-                        <div class="player-number">9</div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         ESTATÍSTICAS
-    ========================= -->
-
-    <main id="estatisticas" class="page">
-
-        <div class="page-header">
-            <p>NEXTGEN UNITED</p>
-            <h1>ESTATÍSTICAS</h1>
         </div>
 
-        <section class="section player-stats-section">
-
-            <div class="section-title">
-                <span></span>
-
-                <div>
-                    <p>PERFORMANCE</p>
-                    <h2>ESTATÍSTICAS</h2>
-                </div>
-            </div>
+    </section>
 
 
-            <div class="stats-table">
 
-                <div class="stats-header">
-                    <span>JOGADOR</span>
-                    <span>POS</span>
-                    <span>JOGOS</span>
-                    <span>GOLOS</span>
-                    <span>ASSIST.</span>
-                    <span>AMARELOS</span>
-                </div>
+    <section class="home-record">
 
+        <div class="record-title">
 
-                <div class="stats-row">
-                    <strong>NIGHTFACE</strong>
-                    <span>GR</span>
-                    <span>4</span>
-                    <span>4</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
+            <p>
+                SEASON RECORD
+            </p>
 
-                <div class="stats-row">
-                    <strong>MOSCA</strong>
-                    <span>GR</span>
-                    <span>4</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
+            <h2>
+                ÉPOCA
+            </h2>
 
-                <div class="stats-row">
-                    <strong>MJ_</strong>
-                    <span>GR</span>
-                    <span>2</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>BANJAQUI</strong>
-                    <span>DD</span>
-                    <span>4</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>LOURO</strong>
-                    <span>DC</span>
-                    <span>3</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>1</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>TXUBAS</strong>
-                    <span>DD</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>DIOGO</strong>
-                    <span>DC</span>
-                    <span>2</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>1</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>GB</strong>
-                    <span>DC</span>
-                    <span>2</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>SALES</strong>
-                    <span>DC</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>DUDA</strong>
-                    <span>MC</span>
-                    <span>3</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>1</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>RAFAEL</strong>
-                    <span>MC</span>
-                    <span>4</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>WOLF</strong>
-                    <span>MC</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>KERMIT</strong>
-                    <span>MC</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>ROGERIO</strong>
-                    <span>MD</span>
-                    <span>3</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>PEDRO</strong>
-                    <span>ME</span>
-                    <span>2</span>
-                    <span>1</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>DOLLY</strong>
-                    <span>ME</span>
-                    <span>3</span>
-                    <span>1</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row president-row">
-                    <strong>MARTINS</strong>
-                    <span>PL</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-                <div class="stats-row captain-row">
-                    <strong>TEDDY</strong>
-                    <span>PL</span>
-                    <span>4</span>
-                    <span>3</span>
-                    <span>1</span>
-                    <span>2</span>
-                </div>
-
-                <div class="stats-row">
-                    <strong>CV</strong>
-                    <span>—</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                    <span>0</span>
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         JOGOS
-    ========================= -->
-
-    <main id="jogos" class="page">
-
-        <div class="page-header">
-            <p>NEXTGEN UNITED</p>
-            <h1>JOGOS</h1>
         </div>
 
 
-        <section class="section">
+        <div class="home-stats">
 
-            <div class="section-title">
-                <span></span>
+            <div>
+                <strong>24</strong>
+                <span>JOGOS</span>
+            </div>
 
-                <div>
-                    <p>UPCOMING MATCH</p>
-                    <h2>PRÓXIMO ADVERSÁRIO</h2>
-                </div>
+            <div>
+                <strong>17</strong>
+                <span>VITÓRIAS</span>
+            </div>
+
+            <div>
+                <strong>4</strong>
+                <span>EMPATES</span>
+            </div>
+
+            <div>
+                <strong>3</strong>
+                <span>DERROTAS</span>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- ==================================================
+     PLANTEL
+================================================== -->
+
+<main id="plantel" class="page">
+
+
+    <section class="page-header">
+
+        <p>
+            FIRST TEAM
+        </p>
+
+        <h1>
+            PLANTEL
+        </h1>
+
+        <span>
+            NEXTGEN UNITED · PRO CLUBS
+        </span>
+
+    </section>
+
+
+    <section class="section">
+
+
+        <!-- GUARDA-REDES -->
+
+        <div class="position-group">
+
+            <div class="position-title goalkeeper-title">
+                <span>01</span>
+                GUARDA-REDES
             </div>
 
 
-            <div class="next-match">
+            <div class="players">
 
-                <div class="match-top">
-                    <p>PRÓXIMO JOGO</p>
-                </div>
+                <div class="player-card goalkeeper">
 
-
-                <div class="match-teams">
-
-                    <div class="team-name">
-                        NEXTGEN<br>UNITED
+                    <div class="player-number">
+                        99
                     </div>
 
-                    <div class="vs">
-                        VS
-                    </div>
-
-                    <div class="team-name">
-                        ADVERSÁRIO
+                    <div class="player-info">
+                        <h3>MOSCA</h3>
+                        <p>GR</p>
                     </div>
 
                 </div>
 
 
-                <div class="match-info">
+                <div class="player-card goalkeeper">
 
-                    <span>DATA A DEFINIR</span>
-                    <span>HORA A DEFINIR</span>
-                    <span>PRO CLUBS</span>
+                    <div class="player-number">
+                        1
+                    </div>
+
+                    <div class="player-info">
+                        <h3>NIGHTFACE</h3>
+                        <p>GR</p>
+                    </div>
+
+                </div>
+
+
+                <div class="player-card goalkeeper">
+
+                    <div class="player-number">
+                        12
+                    </div>
+
+                    <div class="player-info">
+                        <h3>MJ_</h3>
+                        <p>GR</p>
+                    </div>
 
                 </div>
 
             </div>
 
-        </section>
-
-    </main>
+        </div>
 
 
-    <footer>
-        NEXTGEN UNITED • PRO CLUBS
-    </footer>
+
+        <!-- DEFESAS -->
+
+        <div class="position-group">
+
+            <div class="position-title defender-title">
+                <span>02</span>
+                DEFESAS
+            </div>
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
+            <div class="players">
 
-    <script>
+                <div class="player-card defender">
+                    <div class="player-number">2</div>
+                    <div class="player-info">
+                        <h3>BANJAQUI</h3>
+                        <p>DD</p>
+                    </div>
+                </div>
 
-        function showPage(pageName) {
 
-            const pages = document.querySelectorAll(".page");
-            const buttons = document.querySelectorAll(".nav-btn");
+                <div class="player-card defender">
+                    <div class="player-number">5</div>
+                    <div class="player-info">
+                        <h3>LOURO</h3>
+                        <p>DC</p>
+                    </div>
+                </div>
 
-            pages.forEach(page => {
-                page.classList.remove("active");
-            });
 
-            buttons.forEach(button => {
-                button.classList.remove("active");
-            });
+                <div class="player-card defender">
+                    <div class="player-number">23</div>
+                    <div class="player-info">
+                        <h3>TXUBAS</h3>
+                        <p>DD</p>
+                    </div>
+                </div>
 
-            const selectedPage = document.getElementById(pageName);
 
-            if (selectedPage) {
-                selectedPage.classList.add("active");
-            }
+                <div class="player-card defender">
+                    <div class="player-number">4</div>
+                    <div class="player-info">
+                        <h3>DIOGO</h3>
+                        <p>DC</p>
+                    </div>
+                </div>
 
-            buttons.forEach(button => {
 
-                if (
-                    button.textContent
-                        .trim()
-                        .toLowerCase()
-                        .normalize("NFD")
-                        .replace(/[\u0300-\u036f]/g, "") ===
-                    pageName
-                        .replace("inicio", "inicio")
-                        .replace("plantel", "plantel")
-                        .replace("estatisticas", "estatisticas")
-                        .replace("jogos", "jogos")
-                ) {
-                    button.classList.add("active");
-                }
+                <div class="player-card defender">
+                    <div class="player-number">18</div>
+                    <div class="player-info">
+                        <h3>GB</h3>
+                        <p>DC</p>
+                    </div>
+                </div>
 
-            });
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
+                <div class="player-card defender">
+                    <div class="player-number">15</div>
+                    <div class="player-info">
+                        <h3>SALES</h3>
+                        <p>DC</p>
+                    </div>
+                </div>
 
-        // Corrige o botão ativo do menu
-        document.querySelectorAll(".nav-btn").forEach(button => {
+            </div>
 
-            button.addEventListener("click", function() {
+        </div>
 
-                document.querySelectorAll(".nav-btn").forEach(btn => {
-                    btn.classList.remove("active");
-                });
 
-                this.classList.add("active");
 
-            });
+        <!-- MÉDIOS -->
 
+        <div class="position-group">
+
+            <div class="position-title midfielder-title">
+                <span>03</span>
+                MÉDIOS
+            </div>
+
+
+            <div class="players">
+
+                <div class="player-card midfielder">
+                    <div class="player-number">16</div>
+                    <div class="player-info">
+                        <h3>DUDA</h3>
+                        <p>MC</p>
+                    </div>
+                </div>
+
+
+                <div class="player-card midfielder">
+                    <div class="player-number">20</div>
+                    <div class="player-info">
+                        <h3>RAFAEL</h3>
+                        <p>MC</p>
+                    </div>
+                </div>
+
+
+                <div class="player-card midfielder">
+                    <div class="player-number">45</div>
+                    <div class="player-info">
+                        <h3>WOLF</h3>
+                        <p>MC</p>
+                    </div>
+                </div>
+
+
+                <div class="player-card midfielder">
+                    <div class="player-number">36</div>
+                    <div class="player-info">
+                        <h3>KERMIT</h3>
+                        <p>MC</p>
+                    </div>
+                </div>
+
+
+                <div class="player-card midfielder">
+                    <div class="player-number">65</div>
+                    <div class="player-info">
+                        <h3>ROGERIO</h3>
+                        <p>MD</p>
+                    </div>
+                </div>
+
+
+                <div class="player-card midfielder">
+                    <div class="player-number">69</div>
+                    <div class="player-info">
+                        <h3>PEDRO</h3>
+                        <p>ME</p>
+                    </div>
+                </div>
+
+
+                <div class="player-card midfielder">
+                    <div class="player-number">78</div>
+                    <div class="player-info">
+                        <h3>DOLLY</h3>
+                        <p>ME</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- AVANÇADOS -->
+
+        <div class="position-group">
+
+            <div class="position-title attacker-title">
+                <span>04</span>
+                AVANÇADOS
+            </div>
+
+
+            <div class="players">
+
+                <div class="player-card attacker president">
+
+                    <div class="player-number">
+                        10
+                    </div>
+
+                    <div class="player-info">
+                        <h3>MARTINS</h3>
+                        <p>PL · PRESIDENTE</p>
+                    </div>
+
+                    <div class="role president-role">
+                        PRESIDENTE
+                    </div>
+
+                </div>
+
+
+                <div class="player-card attacker captain">
+
+                    <div class="player-number">
+                        9
+                    </div>
+
+                    <div class="player-info">
+                        <h3>TEDDY</h3>
+                        <p>PL · CAPITÃO</p>
+                    </div>
+
+                    <div class="role captain-role">
+                        CAPITÃO
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ==================================================
+     ESTATÍSTICAS
+================================================== -->
+
+<main id="estatisticas" class="page">
+
+
+    <section class="page-header">
+
+        <p>
+            PLAYER PERFORMANCE
+        </p>
+
+        <h1>
+            ESTATÍSTICAS
+        </h1>
+
+        <span>
+            NEXTGEN UNITED · TEMPORADA
+        </span>
+
+    </section>
+
+
+    <section class="section stats-page-section">
+
+
+        <div class="stats-table">
+
+
+            <div class="stats-header">
+
+                <span>JOGADOR</span>
+                <span>POS</span>
+                <span>JOGOS</span>
+                <span>GOLOS</span>
+                <span>ASSIST.</span>
+                <span>AMARELOS</span>
+
+            </div>
+
+
+            <div class="stats-row">
+                <strong>NIGHTFACE</strong>
+                <span>GR</span>
+                <span>4</span>
+                <span>4</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>MOSCA</strong>
+                <span>GR</span>
+                <span>4</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>MJ_</strong>
+                <span>GR</span>
+                <span>2</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>BANJAQUI</strong>
+                <span>DD</span>
+                <span>4</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>LOURO</strong>
+                <span>DC</span>
+                <span>3</span>
+                <span>0</span>
+                <span>0</span>
+                <span>1</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>TXUBAS</strong>
+                <span>DD</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>DIOGO</strong>
+                <span>DC</span>
+                <span>2</span>
+                <span>0</span>
+                <span>0</span>
+                <span>1</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>GB</strong>
+                <span>DC</span>
+                <span>2</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>SALES</strong>
+                <span>DC</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>DUDA</strong>
+                <span>MC</span>
+                <span>3</span>
+                <span>0</span>
+                <span>0</span>
+                <span>1</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>RAFAEL</strong>
+                <span>MC</span>
+                <span>4</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>WOLF</strong>
+                <span>MC</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>KERMIT</strong>
+                <span>MC</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>ROGERIO</strong>
+                <span>MD</span>
+                <span>3</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>PEDRO</strong>
+                <span>ME</span>
+                <span>2</span>
+                <span>1</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>DOLLY</strong>
+                <span>ME</span>
+                <span>3</span>
+                <span>1</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row president-row">
+                <strong>MARTINS</strong>
+                <span>PL</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+            <div class="stats-row captain-row">
+                <strong>TEDDY</strong>
+                <span>PL</span>
+                <span>4</span>
+                <span>3</span>
+                <span>1</span>
+                <span>2</span>
+            </div>
+
+
+            <div class="stats-row">
+                <strong>CV</strong>
+                <span>—</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+                <span>0</span>
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- ==================================================
+     JOGOS
+================================================== -->
+
+<main id="jogos" class="page">
+
+
+    <section class="page-header">
+
+        <p>
+            MATCH CENTER
+        </p>
+
+        <h1>
+            JOGOS
+        </h1>
+
+        <span>
+            NEXTGEN UNITED · CALENDÁRIO
+        </span>
+
+    </section>
+
+
+    <section class="section games-page-section">
+
+
+        <div class="game-status">
+            PRÓXIMO JOGO
+        </div>
+
+
+        <div class="big-game-card">
+
+
+            <div class="team-side">
+
+                <span>
+                    CASA
+                </span>
+
+                <!-- LOGO NEXTGEN UNITED -->
+                <img
+                    class="team-logo"
+                    src="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png"
+                    alt="NextGen United"
+                >
+
+                <h2>
+                    NEXTGEN
+                </h2>
+
+                <strong>
+                    UNITED
+                </strong>
+
+            </div>
+
+
+            <div class="versus">
+
+                <span>
+                    VS
+                </span>
+
+                <small>
+                    A DEFINIR
+                </small>
+
+            </div>
+
+
+            <div class="team-side">
+
+                <span>
+                    FORA
+                </span>
+
+                <h2>
+                    OPONENTE
+                </h2>
+
+                <strong>
+                    A DEFINIR
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="game-information">
+
+
+            <div>
+                <span>DATA</span>
+                <strong>A DEFINIR</strong>
+            </div>
+
+
+            <div>
+                <span>HORA</span>
+                <strong>A DEFINIR</strong>
+            </div>
+
+
+            <div>
+                <span>COMPETIÇÃO</span>
+                <strong>PRO CLUBS</strong>
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <img
+            src="934ac44a-e10c-41e5-9046-b4cedfea3d9e9.png"
+            alt="NextGen United"
+        >
+
+    </div>
+
+    <p>
+        PRO CLUBS · NEXTGEN UNITED
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    function showPage(pageName) {
+
+        /* Esconde todas as páginas */
+
+        const pages = document.querySelectorAll(".page");
+
+        pages.forEach(function(page) {
+            page.classList.remove("active");
         });
 
-    </script>
+
+        /* Mostra apenas a página escolhida */
+
+        const selectedPage = document.getElementById(pageName);
+
+        if (selectedPage) {
+            selectedPage.classList.add("active");
+        }
+
+
+        /* Atualiza o menu */
+
+        const buttons = document.querySelectorAll("nav button");
+
+        buttons.forEach(function(button) {
+            button.classList.remove("active");
+        });
+
+
+        const selectedButton =
+            document.getElementById("nav-" + pageName);
+
+        if (selectedButton) {
+            selectedButton.classList.add("active");
+        }
+
+
+        /* Volta ao topo */
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+</script>
+
 
 </body>
 </html>
